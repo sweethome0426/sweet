@@ -28,6 +28,9 @@ h2 {
 	display: flex;
 	justify-content: space-between;
 }
+article {
+	margin: 00px 0px 0px 15px; width: 1350px; float: left;
+}
 
 .hc {
 	width: 260px;
@@ -151,7 +154,7 @@ body {
 </style>
 
 <body>
-
+<h1>로그인</h1>
 <main class="hc">
 	<h2>로그인</h2>
 	<hr>
@@ -179,7 +182,7 @@ body {
 		<br>
 		<button class="btnon btnon1" onclick="location.href = '#'">회원가입</button>
 		<br>
-		<button class="btnon btnon1" onclick="location.href = '#'">아이디/비밀번호 찾기</button>
+		<button class="btnon btnon1" onclick="location.href = 'pwFind'">비밀번호 찾기</button>
 	</div>
 </main>
 

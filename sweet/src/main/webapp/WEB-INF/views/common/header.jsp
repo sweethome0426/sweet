@@ -120,7 +120,10 @@ function hide(elementId){
                   
                   <br>
                   <br>
-                  <c:if test="${not empty member or not empty memberB}">
+                  <c:if test="${not empty member}">
+                  <a href="${contextPath}/member/logout.do">로그아웃</a>
+                  </c:if>
+                  <c:if test="${not empty memberB}">
                   <a href="${contextPath}/member/logout.do">로그아웃</a>
                   </c:if>
                   <c:if test="${not empty name}">

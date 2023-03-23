@@ -27,9 +27,9 @@
 		<put-attribute name="body" value="/WEB-INF/views/memberB/modMemberB.jsp"/>
 	</definition>
    
-   <definition name="/memberB/listContractB" extends="baseLayoutB">
+   <definition name="/memberB/contractList" extends="baseLayoutB">
 	      <put-attribute name="title" value="계약내역" />
-	      <put-attribute name="body" value="/WEB-INF/views/memberB/listContractB.jsp" />
+	      <put-attribute name="body" value="/WEB-INF/views/memberB/contractList.jsp" />
 	</definition>
    
 	<definition name="/memberB/goodsList" extends="baseLayoutB">

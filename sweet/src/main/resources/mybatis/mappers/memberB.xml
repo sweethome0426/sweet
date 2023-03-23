@@ -12,7 +12,6 @@
       <result property="dp_name" column="dp_name" />
       <result property="email1" column="email1" />
       <result property="email2" column="email2" />
-
       <result property="addr1" column="addr1" />
       <result property="addr2" column="addr2" />
       <result property="addr3" column="addr3" />
@@ -60,26 +59,25 @@
       ]]>
    </select>
    
-   <update id="updateMemberB"  parameterType="memberVOB">
-     <![CDATA[
-	     update business
-	     set bp_pw=#{bp_pw}, 
-	     	 name=#{name}, 
-	     	 email1=#{email1},
-	     	 email2=#{email2},
-	     	 addr1=#{addr1},
-			 addr2=#{addr2},
-			 addr3=#{addr3},
-			 tel1=#{tel1},
-			 tel2=#{tel2},
-			 tel3=#{tel3},
-			 hp1=#{hp1},
-			 hp2=#{hp2}
-			 hp3=#{hp3}
-	     where
-	     bp_id=#{bp_id}
-      ]]>      
-   </update> 
+  <update id="updateMemberB" parameterType="memberVOB">
+  <![CDATA[
+    update business
+    set bp_pw=#{bp_pw}, 
+        name=#{name}, 
+        email1=#{email1},
+        email2=#{email2},
+        addr1=#{addr1},
+        addr2=#{addr2},
+        addr3=#{addr3},
+        tel1=#{tel1},
+        tel2=#{tel2},
+        tel3=#{tel3},
+        hp1=#{hp1},
+        hp2=#{hp2},
+        hp3=#{hp3}
+    where bp_id=#{bp_id}
+  ]]>
+</update>
    
    <select id="selectContractByIdB" resultMap="contractResultB">
     <![CDATA[
