@@ -69,14 +69,14 @@ public class UserControllerImpl implements UserController {
 		return mav;
 	}
 	
-	//ȸ�� Ż�� get
+	//회원탈퇴페이지 get
 		@RequestMapping(value="/memberDeleteView.do", method = RequestMethod.GET)
 		public String deleteUser() throws Exception{
 		return "/user/memberDeleteView";
 		}
 		
 				
-	//ȸ��Ż�� post
+	//회원탈퇴 post
 	@RequestMapping(value="/memberDelete.do", method = RequestMethod.POST)
 	public String memberDelete(MemberVO memberVO, HttpSession session, RedirectAttributes rttr) throws Exception{
 					
