@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sweethome.sweet.member.vo.MemberVO;
 import com.sweethome.sweet.memberB.dao.MemberDAOB;
 import com.sweethome.sweet.memberB.vo.MemberVOB;
 import com.sweethome.sweet.memberB.vo.ContractVO;
@@ -19,6 +20,16 @@ public class MemberServiceBImpl implements MemberServiceB {
 	@Autowired
 	private MemberDAOB memberDAOB;
 
+	@Override
+	public int addMemberB(MemberVOB memberB) throws DataAccessException {
+		return memberDAOB.insertMemberB(memberB);
+	}
+	
+	@Override
+	public String overlappedB(String bp_id) {
+		return memberDAOB.selectOverlappedIDB(bp_id);
+	}
+	
 	@Override
 	public MemberVOB loginB(MemberVOB memberVOB) throws Exception{
 		return memberDAOB.loginByIdB(memberVOB);
@@ -43,4 +54,8 @@ public class MemberServiceBImpl implements MemberServiceB {
 		return contractListB;
 	}
 	
+	@Override
+	public void memberDeleteB(MemberVOB memberVOB) throws Exception {
+		memberDAOB.memberDeleteB(memberVOB);
+	}
 }

@@ -16,7 +16,19 @@ import com.sweethome.sweet.memberB.vo.ContractVO;
 public class MemberDAOBImpl implements MemberDAOB {
 	@Autowired
 	private SqlSession sqlSession;
-
+	
+	@Override
+	public int insertMemberB(MemberVOB memberVOB) throws DataAccessException {
+		int result = sqlSession.insert("mapper.memberB.insertMemberB", memberVOB);
+		return result;
+	}
+	
+	@Override
+	public String selectOverlappedIDB(String bp_id) throws DataAccessException {
+		String result =  sqlSession.selectOne("mapper.memberB.selectOverlappedIDB", bp_id);
+		return result;
+	}
+	
 	@Override
 	public MemberVOB loginByIdB(MemberVOB memberVOB) throws DataAccessException{
 		  MemberVOB voB = sqlSession.selectOne("mapper.memberB.loginByIdB",memberVOB);
@@ -40,6 +52,11 @@ public class MemberDAOBImpl implements MemberDAOB {
 		List<ContractVO> contractListB = null;
 		contractListB = sqlSession.selectList("mapper.memberB.selectContractByIdB");
 		return contractListB;
+	}
+	
+	@Override
+	public void memberDeleteB(MemberVOB memberVOB) throws Exception {
+		sqlSession.delete("mapper.memberB.memberDeleteB", memberVOB);
 	}
 	
 }

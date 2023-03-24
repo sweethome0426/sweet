@@ -46,6 +46,26 @@
    </resultMap> 
  
  
+ 	   <insert id="insertMemberB" parameterType="memberVOB">
+      <![CDATA[
+         insert into business(bp_id, bp_pw, name, dp_name, email1,
+         email2, addr1, addr2, addr3, tel1,
+         tel2, tel3, hp1, hp2, hp3)
+         values(#{bp_id}, #{bp_pw}, #{name}, #{dp_name}, #{email1}, #{email2},
+         #{addr1}, #{addr2}, #{addr3},  #{tel1}, #{tel2}, #{tel3},
+         #{hp1}, #{hp2}, #{hp3} )
+      ]]>
+   </insert>
+               <!-- id 중복체크 하기위한 쿼리구문이다.크킄 
+               함수에서 개수가 0보다 큰지 확인하여 ID가 ​​이미 사용 중임을 나타낼 수 있는 쿼리문
+               제발돼라!!!!!!!!!!! 다시원상 복기 03.21  3교시..!!!
+               
+                -->
+   <select id="selectOverlappedIDB" parameterType="String" resultType="String">
+     select * from business 
+      where bp_id = #{bp_id}
+   </select>
+   
 	 <select id="loginByIdB"  resultType="memberVOB"   parameterType="memberVOB" >
 		<![CDATA[
 			select * from business	
@@ -86,5 +106,14 @@
         ORDER BY goodscon_id DESC
     ]]>
 	</select>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="memberDeleteB" parameterType="memberVOB">
+	   <![CDATA[	
+			delete FROM business
+			where bp_id=#{bp_id}
+			and bp_pw=#{bp_pw}
+		]]>
+	</delete>
 
 </mapper>

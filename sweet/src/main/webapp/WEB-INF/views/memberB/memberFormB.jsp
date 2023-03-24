@@ -355,7 +355,7 @@ function execDaumPostcode() {
 	
 	/* 여기부터는 ID 중복체크하는 부분  */
 	function fn_overlapped(){		//중복체크 여부 함수 
-    var _id=$("#_member_id").val();		//_멤버아이디
+    var _id=$("#_bp_id").val();		//_멤버아이디
     if(_id=='' || _id.length == 0){		//if 넣어서 id 길이 비교하는데 0 이냐 0이면 밑으로들어감
    	 alert("ID를 입력하세요");			//이게 실행됨 입력하라고 뜸
    	 return;					// 리턴해준당
@@ -363,16 +363,16 @@ function execDaumPostcode() {
     $.ajax({		//ajax 쓰는데
        type:"post",		//이건 타입 (get, post put 등 타입을말함)
        async:false,		// 동기화, 비동기화 여부인데 (default : true 로 되어있음) 지금은 펄스
-       url:"${contextPath}/member/overlapped.do",   // 요청할 서버 url 이다
+       url:"${contextPath}/memberB/overlappedB.do",   // 요청할 서버 url 이다
        dataType:"text",		// 데이터 타입 (html, xml, json, text 등등) json 으로바꿔봄(03.21오전) -> 다시 원상복기 03.21 11:20
-       data: {id:_id},	// 보낼 데이터 (object, String, Array 등)
+       data: {bp_id:_id},	// 보낼 데이터 (object, String, Array 등)
        success:function (data, textStatus){		// 03.21오전 response로 바꿈 요청 성공시 실행할 이벤트 지정인가? 그런듯?아마?아닐수도
           if(data == ''){		// 조건식 바꿨다!!제발제바라라아아 이건 parseInt() 개수가 0보다 크면 이미 사용중인 id 이니까 오류메시지 출력하게한거다!!!
         	  					// 그니까 data 가 직접친 id 인데 비교를해 '' 비어있는 문자면?? 그 디비에 없는 아이디니까 참으로 들어오게된다.
        	    alert("사용할 수 있는 ID입니다.");
-       	    $('#btnOverlapped').prop("disabled", true);
-       	    $('#_member_id').prop("disabled", true);
-       	    $('#member_id').val(_id);
+       	    $('#btnOverlapped').prop(true);
+       	    $('#_bp_id').prop(true);
+       	    $('#bp_id').val(_id);
        	  
           }else{
         	  alert("사용할 수 없는 ID입니다.");
@@ -392,7 +392,7 @@ function execDaumPostcode() {
 	function joinform_check() {
 		//변수에 담아주기
 			
-		  var id = document.getElementById("_member_id");
+		  var id = document.getElementById("_bp_id");
 		  var pwd = document.getElementById("pwd");
 		  var repwd = document.getElementById("repwd");
 		  var name_ = document.getElementById("name_");
@@ -426,14 +426,11 @@ function execDaumPostcode() {
 		    repwd.focus();
 		    return false;
 		  };
-		  
 		  if(name_.value == "") { 		//이름 입력안하면이거다.
 			 alert("이름을 입력하세요")		//입력해라
 			 name_.focus();
 		  	 return false;
 		  }
-		  
-		  
 	}
 
 
@@ -461,7 +458,7 @@ function execDaumPostcode() {
 </head>
 
 <body> 		<!-- onsubmit 이건 submit 양식 이벤트 발생할때 동작을 지정하는데 return -> 함수명 써준다면 false든 true 든 넣어서 보낼수있다. -->
-<form action="${contextPath}/member/addMember.do" onsubmit="return joinform_check();" method="post">
+<form action="${contextPath}/memberB/addMemberB.do" onsubmit="return joinform_check();" method="post">
 	<h1 class="h1">회원가입</h1>
   <div class="d-div" style="padding:20px;">
   	
@@ -485,8 +482,8 @@ function execDaumPostcode() {
     </div>
     <!-- 여기밑에 아이디 버튼 input 타입이다.  -->
     <div class="sign-input">
-      <input type="text" name="_member_id" id="_member_id" class="ia"/>
-      <input type="hidden" name="member_id" id="member_id" />
+      <input type="text" name="_bp_id" id="_bp_id" class="ia"/>
+      <input type="hidden" name="bp_id" id="bp_id" />
       
       <input type="button" id="btnOverlapped" value="중복체크" onClick="fn_overlapped()"/>
       (영문 소문자/숫자 , 4~16자)
@@ -497,14 +494,14 @@ function execDaumPostcode() {
      <h5 style="line-height:2.5em;">비밀번호<span style="color:red;">*</span></h5>
     </div>
     <div class="sign-input"><!-- 이 바로밑이 비밀번호 인풋 타입  -->
-    <input type="password" name="member_pw" id="pwd" class="ia"/>(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)
+    <input type="password" name="bp_pw" id="pwd" class="ia"/>(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)
     </div>
     <hr class="hr2">
     <div class="sign-text">
      <h5 style="line-height:2.5em;">비밀번호확인<span style="color:red;">*</span></h5>
     </div>
     <div class="sign-input"><!-- 이 바로밑이 비밀번호 확인 인풋 타입 -->
-    <input type="password" name="member_pw2" id="repwd"  class="ia"/>(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)
+    <input type="password" name="bp_pw2" id="repwd"  class="ia"/>(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)
     </div>
     <hr class="hr2">
     <div class="sign-text">
@@ -513,6 +510,15 @@ function execDaumPostcode() {
     <div class="sign-input">
       <!-- 바로밑 이름 인풋 타입  -->
     <input type="text" name="name" id="name_" class="ia"/>
+    </div>
+    
+    <hr class="hr2">
+    <div class="sign-text">
+     <h5 style="line-height:2.5em;">사업자 이름<span style="color:red;">*</span></h5>
+    </div>
+    <div class="sign-input">
+      <!-- 바로밑 이름 인풋 타입  -->
+    <input type="text" name="dp_name" id="dp_name_" class="ia"/>
     </div>
     
     <hr class="hr2"><!-- 여기부터 이메일 -->
@@ -608,7 +614,7 @@ function execDaumPostcode() {
      <h5>생년월일<span style="color:red;">*</span></h5>
     </div>
     <div class="sign-input">		<!-- 여기 입력란 생년월일 입력란이다 -->
-    <input type="text" name="member_birth" style="width: 100px;" class="ib">&nbsp;-없이 주민번호 앞자리 입력해주세요&nbsp;
+    <!-- <input type="text" name="member_birth" style="width: 100px;" class="ib">&nbsp;-없이 주민번호 앞자리 입력해주세요&nbsp; -->
     
      
     </div>
@@ -620,7 +626,6 @@ function execDaumPostcode() {
       				<!-- 여기 부터 회원가입 클릭하는곳 -->
       <input type="submit" onclick="joinform_check()" value="회원가입">
       <input type="reset" value="다시입력">
-
       </div>
     </div>  
   </form>

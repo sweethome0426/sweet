@@ -33,6 +33,43 @@ public class MemberControllerBImpl implements MemberControllerB {
 	private ContractVO contractVO ;
 	
 	
+	//회원가입
+	@Override			
+	@RequestMapping(value="/memberB/addMemberB.do" ,method = RequestMethod.POST)
+	public ResponseEntity addMemberB(@ModelAttribute("memberB") MemberVOB memberVOB,
+			                  HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("html/text;charset=utf-8");
+		String message = null;
+		ResponseEntity resEntity = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
+		try {
+			memberServiceB.addMemberB(memberVOB);
+			message = "<script>";
+			message +=" alert('회원가입을 마쳤습니다. 로그인창으로 이동합니다.');";
+			message += "location.href='"+request.getContextPath()+"/memberB/loginFormB.do';";
+			message += "</script>";
+		}catch(Exception e) {
+			message = "<script>";
+			message += "alert('오류 발생 다시 시도해 주세요');";
+			message += "location.href='" + request.getContextPath()+"/memberB/memberFormB.do';";
+			message += "</script>";
+			e.printStackTrace();
+		}
+		resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+		return resEntity;
+	}
+	
+	@Override				// 아이디 중복체크 하는부분 컨트롤러 .do 여기로 오게된다.
+	@RequestMapping(value="/memberB/overlappedB.do" ,method = RequestMethod.POST)
+	public ResponseEntity overlappedB(@RequestParam("bp_id") String bp_id,HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ResponseEntity resEntity = null;
+		String result = memberServiceB.overlappedB(bp_id);
+		resEntity = new ResponseEntity(result, HttpStatus.OK);
+		return resEntity;
+	}
+	
 	//로그인
 	@Override
 	@RequestMapping(value = "/memberB/loginB.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -88,39 +125,6 @@ public class MemberControllerBImpl implements MemberControllerB {
 		return mav;
 	}
 	
-	
-	// 사업자 회원가입 할때 이곳으로 온다
-//	@Override
-//	@RequestMapping(value="/businessForm", method = RequestMethod.POST)
-//	public ResponseEntity addbusiness(@ModelAttribute("memberB") MemberVOB memberVOB,
-//							HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		request.setCharacterEncoding("utf-8");
-//		response.setContentType("html/text;charset=utf-8");
-//		String message = null;
-//		ResponseEntity resEntity = null;
-//		HttpHeaders responseHeaders = new HttpHeaders();
-//		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
-//		try {
-//			memberServiceB.addMember(memberVOB);
-//			message = "<script>";
-//			
-//			message +=" alert('회원가입을 마쳤습니다. 로그인창으로 이동합니다.');";
-//			message += "location.href='"+request.getContextPath()+"/member/loginForm.do';";
-//			message += "</script>";
-//		}catch(Exception e) {
-//			message = "<script>";
-//			message += "alert('오류 발생 다시 시도해 주세요');";
-//			message += "location.href='" + request.getContextPath()+"/member/memberForm.do';";
-//			message += "</script>";
-//			e.printStackTrace();
-//		}
-//		resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
-//		return resEntity;
-//
-//	}
-//	
-	
-	
 	//회원 정보 수정
 	@Override
 	@RequestMapping(value="/memberB/modMemberB", method=RequestMethod.GET)
@@ -171,10 +175,31 @@ public class MemberControllerBImpl implements MemberControllerB {
 	    return mav;
 	}
 	
+	//회원탈퇴페이지 get
+	@RequestMapping(value="/memberB/memberDeleteViewB.do", method = RequestMethod.GET)
+	public String deleteUserB() throws Exception{
+	return "/memberB/memberDeleteViewB";
+	}
+			
+					
+	//회원탈퇴 post
+	@RequestMapping(value="/memberB/memberDeleteB.do", method = RequestMethod.POST)
+	public String memberDeleteB(MemberVOB memberVOB, HttpSession session, RedirectAttributes rttr) throws Exception{
+					
+		MemberVOB memberB = (MemberVOB) session.getAttribute("memberB");
+					
+		// 실제 비밀번호
+		String currentPw = memberB.getBp_pw();
+		// 입력한 비밀번호
+		String userInputPw = memberVOB.getBp_pw();
+					
+		if(!(currentPw.equals(userInputPw))) {
+			rttr.addFlashAttribute("msg", false);
+			return "redirect:/memberB/memberDeleteViewB.do";
+			}
+				memberServiceB.memberDeleteB(memberVOB);
+				session.invalidate();
+				return "redirect:/main.do";
+			}
 	
-
-
-
-	
-
 }
