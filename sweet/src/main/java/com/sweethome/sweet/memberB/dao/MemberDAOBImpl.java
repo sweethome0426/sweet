@@ -1,5 +1,6 @@
 package com.sweethome.sweet.memberB.dao;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,7 +9,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.sweethome.sweet.memberB.vo.MemberVOB;
-import com.sweethome.sweet.member.vo.MemberVO;
 import com.sweethome.sweet.memberB.vo.ContractVO;
 
 
@@ -58,5 +58,15 @@ public class MemberDAOBImpl implements MemberDAOB {
 	public void memberDeleteB(MemberVOB memberVOB) throws Exception {
 		sqlSession.delete("mapper.memberB.memberDeleteB", memberVOB);
 	}
+	
+	@Override
+    public MemberVOB selectMemberB(String email) throws IOException {
+        return sqlSession.selectOne("mapper.memberB.selectMemberB", email);
+    }
+	
+	@Override
+    public int pwUpdate(MemberVOB vo) throws IOException {
+        return sqlSession.update("mapper.memberB.pwUpdate", vo);
+    }
 	
 }

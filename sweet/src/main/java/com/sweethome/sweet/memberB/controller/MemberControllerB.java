@@ -1,5 +1,7 @@
 package com.sweethome.sweet.memberB.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -28,4 +30,13 @@ public interface MemberControllerB {
 	public ModelAndView listContractB(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public String memberDeleteB(MemberVOB memberVOB, HttpSession session, RedirectAttributes rttr) throws Exception;
+	
+	public String pwFindB() throws Exception;
+	public ModelAndView sendMailB(HttpSession session, 
+			@RequestParam("bp_id") String bp_id,
+			@ModelAttribute("email") String email,
+            HttpServletRequest request, 
+            HttpServletResponse response) throws IOException;
+	public String checkEmailB(@RequestParam(value="email_injeung") String email_injeung, @RequestParam(value = "num") String num) throws IOException;
+	public String pwNewB(MemberVOB vo, HttpSession session) throws IOException;
 }

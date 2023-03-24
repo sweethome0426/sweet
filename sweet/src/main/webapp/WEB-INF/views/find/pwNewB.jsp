@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="${contextPath }/memberB/pwNew" method="POST" class="content">
+	<form action="${contextPath }/memberB/find/pwNew" method="POST" class="content">
 	<div class="textbox">
 		<input id="pw" name="pw" type="password"><label>새비밀번호</label>
 		<div class="error">

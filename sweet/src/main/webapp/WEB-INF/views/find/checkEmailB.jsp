@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="${contextPath }/memberB/checkEmail" method="post">
+	<form action="${contextPath }/memberB/find/checkEmail" method="post">
 	<input type="hidden" name ="num" value="${num }">
 		<div class=content>
 			<div class="textbox">

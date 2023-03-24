@@ -1,7 +1,10 @@
 package com.sweethome.sweet.memberB.controller;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +36,8 @@ public class MemberControllerBImpl implements MemberControllerB {
 	private MemberVOB memberVOB ;
 	@Autowired
 	private ContractVO contractVO ;
+	@Autowired
+	private JavaMailSenderImpl mailSender;
 	
 	
 	//회원가입
@@ -61,7 +68,8 @@ public class MemberControllerBImpl implements MemberControllerB {
 		return resEntity;
 	}
 	
-	@Override				// 아이디 중복체크 하는부분 컨트롤러 .do 여기로 오게된다.
+	//회원가입시 아이디 중복체크
+	@Override				
 	@RequestMapping(value="/memberB/overlappedB.do" ,method = RequestMethod.POST)
 	public ResponseEntity overlappedB(@RequestParam("bp_id") String bp_id,HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ResponseEntity resEntity = null;
@@ -201,5 +209,89 @@ public class MemberControllerBImpl implements MemberControllerB {
 				session.invalidate();
 				return "redirect:/main.do";
 			}
+	
+	//비밀번호 찾기 form
+		@RequestMapping(value = "/find/pwFindB")
+		public String pwFindB() throws Exception{
+			return "/find/pwFindB";
+		}
+	
+	//이메일로 인증번호 보내기
+		@RequestMapping(value = "/find/sendMailB", method = RequestMethod.POST)
+		public ModelAndView sendMailB(HttpSession session, 
+		        @RequestParam("bp_id") String bp_id, // 요청 파라미터 "bp_id"를 받아옴
+		        @ModelAttribute("email") String email, // 모델 속성 "email"을 받아옴
+		        HttpServletRequest request, 
+		        HttpServletResponse response) throws IOException {
+		        
+		    // 입력된 이메일 주소가 있는지 확인하고 MemberVOB 객체로 반환
+		    MemberVOB vo = memberServiceB.selectMemberB(email);
+		            
+		    if(vo != null) { // 입력된 이메일 주소에 해당하는 회원 정보가 있을 경우
+		        Random r = new Random(); // 랜덤한 숫자를 생성하기 위해 Random 객체 생성
+		        int num = r.nextInt(999999); // 0부터 999999 사이의 랜덤한 숫자 생성
+		            
+		        if (vo.getBp_id().equals(bp_id)) { // 입력된 아이디가 해당하는 회원 정보의 아이디와 일치하는 경우
+		            session.setAttribute("email", vo.getEmail1() + '@' + vo.getEmail2()); // 세션에 이메일 주소를 저장
+
+		            String setfrom = "bomi258@naver.com"; // 보내는 사람 이메일 주소
+		            String tomail = email; // 받는 사람 이메일 주소
+		            String title = "[스윗홈] 비밀번호변경 인증 이메일 입니다"; // 이메일 제목
+		            String content = System.getProperty("line.separator") + "안녕하세요 회원님" + System.getProperty("line.separator")
+		                    + "비밀번호변경 인증번호는 " + num + " 입니다." + System.getProperty("line.separator"); // 이메일 내용
+		            try {
+		                // MimeMessage 객체와 MimeMessageHelper 객체를 생성하여 이메일을 보냄
+		                MimeMessage message = mailSender.createMimeMessage();
+		                MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "utf-8");
+
+		                messageHelper.setFrom(setfrom); 
+		                messageHelper.setTo(tomail); 
+		                messageHelper.setSubject(title);
+		                messageHelper.setText(content); 
+
+		                mailSender.send(message); // 메일 보내기
+		            } catch (Exception e) {
+		                System.out.println(e.getMessage());
+		            }
+
+		            ModelAndView mv = new ModelAndView();
+		            mv.setViewName("/find/checkEmailB"); // 뷰 이름 설정
+		            mv.addObject("num", num); // 모델에 "num" 속성 추가
+		            return mv; // 모델과 뷰를 반환하여 응답 생성
+		        } else { // 입력된 아이디가 해당하는 회원 정보의 아이디와 일치하지 않는 경우
+		            ModelAndView mv = new ModelAndView();
+		            mv.setViewName("/find/pwFindB"); // 뷰 이름 설정
+		            return mv; // 모델과 뷰를 반환하여 응답 생성
+		        }
+		    } else { // 입력된 이메일 주소에 해당하는 회원 정보가 없는 경우
+		        ModelAndView mv = new ModelAndView();
+		        mv.setViewName("/find/pwFindB"); // 뷰 이름
+				return mv;
+			}
+		}
+		
+		//이메일 인증번호 확인
+		@RequestMapping(value = "/find/checkEmailB", method = RequestMethod.POST)
+		public String checkEmailB(@RequestParam(value="email_injeung") String email_injeung, @RequestParam(value = "num") String num) throws IOException{
+			if(email_injeung.equals(num)) {
+				return "/find/pwNewB";
+			}
+			else {
+				return "/find/pwFindB";
+			}
+		} 
+		
+		//새 비밀번호 없데이트
+		@RequestMapping(value = "/find/pwNewB", method = RequestMethod.POST)
+		public String pwNewB(MemberVOB vo, HttpSession session) throws IOException{
+			int result = memberServiceB.pwUpdate(vo);
+			if(result == 1) {
+				return "/memberB/loginFormB.do";
+			}
+			else {
+				System.out.println("pw_update"+ result);
+				return "/find/pwNewB";
+			}
+		}
 	
 }
