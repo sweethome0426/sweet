@@ -79,24 +79,24 @@
    </select>
    
   <update id="updateMemberB" parameterType="memberVOB">
-  <![CDATA[
-    update business
-    set bp_pw=#{bp_pw}, 
-        name=#{name}, 
-        email1=#{email1},
-        email2=#{email2},
-        addr1=#{addr1},
-        addr2=#{addr2},
-        addr3=#{addr3},
-        tel1=#{tel1},
-        tel2=#{tel2},
-        tel3=#{tel3},
-        hp1=#{hp1},
-        hp2=#{hp2},
-        hp3=#{hp3}
-    where bp_id=#{bp_id}
-  ]]>
-</update>
+	  <![CDATA[
+	    update business
+	    set bp_pw=#{bp_pw}, 
+	        name=#{name}, 
+	        email1=#{email1},
+	        email2=#{email2},
+	        addr1=#{addr1},
+	        addr2=#{addr2},
+	        addr3=#{addr3},
+	        tel1=#{tel1},
+	        tel2=#{tel2},
+	        tel3=#{tel3},
+	        hp1=#{hp1},
+	        hp2=#{hp2},
+	        hp3=#{hp3}
+	    where bp_id=#{bp_id}
+	  ]]>
+  </update>
    
    <select id="selectContractByIdB" resultMap="contractResultB">
     <![CDATA[
@@ -116,13 +116,13 @@
 	</delete>
 	
 	<!-- 회원정보조회 -->
-<select id="selectMemberB" parameterType="String" resultType="MemberVOB">
-SELECT * FROM business WHERE email = #{email} 
-</select>
-
-<!-- 패스워드변경 -->
-<update id = "pwUpdate" parameterType="MemberVOB">
-update business set bp_pw=#{bp_pw} where email = #{email}
-</update>
+	<select id="selectMemberB" parameterType="String" resultType="MemberVOB">
+	SELECT * FROM business WHERE email = #{email} 
+	</select>
+	
+	<!-- 비밀번호변경 -->
+	<update id = "pwUpdate" parameterType="MemberVOB">
+	update business set bp_pw=#{bp_pw} where email = #{email}
+	</update>
 
 </mapper>

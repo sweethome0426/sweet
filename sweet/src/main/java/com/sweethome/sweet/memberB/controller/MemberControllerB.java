@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,6 +38,7 @@ public interface MemberControllerB {
 			@ModelAttribute("email") String email,
             HttpServletRequest request, 
             HttpServletResponse response) throws IOException;
-	public String checkEmailB(@RequestParam(value="email_injeung") String email_injeung, @RequestParam(value = "num") String num) throws IOException;
-	public String pwNewB(MemberVOB vo, HttpSession session) throws IOException;
+	public ModelAndView checkEmailB(HttpSession session, 
+	        @RequestParam(value="email_injeung") String email_injeung) throws IOException;
+	public String pwNewB(MemberVOB vo, @RequestParam("pw_new_confirm") String pwNewConfirm, HttpSession session, Model model) throws IOException;
 }
