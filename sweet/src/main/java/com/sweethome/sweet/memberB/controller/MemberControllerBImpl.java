@@ -232,7 +232,7 @@ public class MemberControllerBImpl implements MemberControllerB {
 		        int num = r.nextInt(999999); // 0부터 999999 사이의 랜덤한 숫자 생성
 		            
 		        if (vo.getBp_id().equals(bp_id)) { // 입력된 아이디가 해당하는 회원 정보의 아이디와 일치하는 경우
-		            session.setAttribute("email", vo.getEmail1() + '@' + vo.getEmail2()); // 세션에 이메일 주소를 저장
+		            session.setAttribute("email", vo.getEmail()); // 세션에 이메일 주소를 저장
 
 		            String setfrom = "bomi258@naver.com"; // 보내는 사람 이메일 주소
 		            String tomail = email; // 받는 사람 이메일 주소
@@ -286,7 +286,7 @@ public class MemberControllerBImpl implements MemberControllerB {
 		public String pwNewB(MemberVOB vo, HttpSession session) throws IOException{
 			int result = memberServiceB.pwUpdate(vo);
 			if(result == 1) {
-				return "/memberB/loginFormB.do";
+				return "/sweet/memberB/loginFormB.do";
 			}
 			else {
 				System.out.println("pw_update"+ result);

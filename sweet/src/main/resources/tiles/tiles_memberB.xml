@@ -23,6 +23,12 @@
       <put-attribute name="side" value="" />
    </definition>
    
+   <definition name="/find/findPW" extends="baseLayoutB">
+      <put-attribute name="title" value="비밀번호찾기" />
+      <put-attribute name="body" value="/WEB-INF/views/find/findPW.jsp" />
+      <put-attribute name="side" value="" />
+   </definition>
+   
    <definition name="/find/pwFindB" extends="baseLayoutB">
       <put-attribute name="title" value="비밀번호찾기" />
       <put-attribute name="body" value="/WEB-INF/views/find/pwFindB.jsp" />
@@ -36,7 +42,7 @@
    </definition>
    
    <definition name="/find/pwNewB" extends="baseLayoutB">
-      <put-attribute name="title" value="비밀번호찾기" />
+      <put-attribute name="title" value="새비밀번호" />
       <put-attribute name="body" value="/WEB-INF/views/find/pwNewB.jsp" />
       <put-attribute name="side" value="" />
    </definition>

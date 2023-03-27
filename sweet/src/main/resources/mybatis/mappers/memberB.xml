@@ -10,8 +10,7 @@
       <result property="bp_pw" column="bp_pw" />
       <result property="name" column="name" />
       <result property="dp_name" column="dp_name" />
-      <result property="email1" column="email1" />
-      <result property="email2" column="email2" />
+      <result property="email" column="email" />
       <result property="addr1" column="addr1" />
       <result property="addr2" column="addr2" />
       <result property="addr3" column="addr3" />
@@ -118,12 +117,12 @@
 	
 	<!-- 회원정보조회 -->
 <select id="selectMemberB" parameterType="String" resultType="MemberVOB">
-SELECT * FROM business WHERE CONCAT(email1, '@', email2) = #{email1} 
+SELECT * FROM business WHERE email = #{email} 
 </select>
 
 <!-- 패스워드변경 -->
 <update id = "pwUpdate" parameterType="MemberVOB">
-update business set bp_pw=#{bp_pw} where (email1, '@', email2) = #{email1}
+update business set bp_pw=#{bp_pw} where email = #{email}
 </update>
 
 </mapper>
