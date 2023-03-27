@@ -84,7 +84,7 @@ public class MemberControllerImpl   implements MemberController {
 			memberService.addMember(memberVO);
 			message = "<script>";
 			
-			message +=" alert('회원가입을 마쳤습니다. 로그인창으로 이동합니다.');";
+			message +=" alert('회원가입을 마쳤습니다로그인창으로 이동합니다.');";
 			message += "location.href='"+request.getContextPath()+"/member/loginForm.do';";
 			message += "</script>";
 		}catch(Exception e) {
@@ -92,7 +92,7 @@ public class MemberControllerImpl   implements MemberController {
 			message += "alert('오류 발생 다시 시도해 주세요');";
 			message += "location.href='" + request.getContextPath()+"/member/memberForm.do';";
 			message += "</script>";
-			e.printStackTrace();
+			e.printStackTrace(); //주석 필요
 		}
 		resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		return resEntity;
@@ -169,8 +169,8 @@ public class MemberControllerImpl   implements MemberController {
 	}
 	
 	@Override
-	@RequestMapping(value="/member/modMember.do", method=RequestMethod.GET)
-	public ModelAndView modMember(@RequestParam("id") String member_id, HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping(value="/member/modMember", method=RequestMethod.POST)
+	public ModelAndView modMember(@RequestParam("member_id") String member_id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		System.out.println("Call modMember-method of control");
 		request.setCharacterEncoding("utf-8");

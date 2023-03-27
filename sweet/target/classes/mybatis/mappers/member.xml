@@ -74,7 +74,7 @@
    
    <resultMap id="kakaoResult" type="kakaoDTO">
       <result property="number" column="number" />
-      <result property="name" column="name" />
+      <result property="nickname" column="nickname" />
       <result property="email" column="email" />
    </resultMap> 
 
@@ -161,16 +161,16 @@ WHERE member_id=#{member_id}
 	
 	
 	<select id="findKakao" parameterType="java.util.HashMap" resultType="kakaoDTO">
-		select * from kakao_table where name=#{nickname} and email=#{email}
+		select * from kakao_table where nickname=#{nickname} and email=#{email}
 	</select>
 	
 	<insert id="kakaoInsert" parameterType="java.util.HashMap">
-		insert into kakao_table(name, email)
+		insert into kakao_table(nickname, email)
 			values(#{nickname}, #{email})
 	</insert>
 	
 	<select id="kakaoNumber" parameterType="kakaoDTO" resultType="kakaoDTO">
-		select * from kakao_table where name=#{name} and email=#{email}
+		select * from kakao_table where nickname=#{nickname} and email=#{email}
 	</select>
 
 </mapper>
