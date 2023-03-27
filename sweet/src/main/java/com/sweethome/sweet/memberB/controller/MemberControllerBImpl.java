@@ -212,102 +212,103 @@ public class MemberControllerBImpl implements MemberControllerB {
 			}
 	
 	//비밀번호 찾기 form
-		@RequestMapping(value = "/find/pwFindB")
-		public String pwFindB() throws Exception{
-			return "/find/pwFindB";
-		}
+	@RequestMapping(value = "/find/pwFindB")
+	public String pwFindB() throws Exception{
+		return "/find/pwFindB";
+	}
 	
-		//이메일로 인증번호 보내기
-		@RequestMapping(value = "/find/sendMailB", method = RequestMethod.POST)
-		public ModelAndView sendMailB(HttpSession session, 
-		        @RequestParam("bp_id") String bp_id,
-		        @ModelAttribute("email") String email,
-		        HttpServletRequest request, 
-		        HttpServletResponse response) throws IOException {
-		        
-		    MemberVOB vo = memberServiceB.selectMemberB(email);
-		            
-		    if(vo != null) {
-		        Random r = new Random();
-		        int authNum = r.nextInt(999999);
-		            
-		        if (vo.getBp_id().equals(bp_id)) {
-		            session.setAttribute("email", vo.getEmail());
-		            session.setAttribute("authNum", authNum); // 인증번호를 세션에 저장
+	//이메일로 인증번호 보내기
+	@RequestMapping(value = "/find/sendMailB", method = RequestMethod.POST)
+	public ModelAndView sendMailB(HttpSession session, 
+	        @RequestParam("bp_id") String bp_id,
+	        @ModelAttribute("email") String email,
+	        HttpServletRequest request, 
+	        HttpServletResponse response) throws IOException {
+	        
+	    MemberVOB vo = memberServiceB.selectMemberB(email);
+	            
+	    if(vo != null) {
+	        Random r = new Random();
+	        int authNum = r.nextInt(999999);
+	            
+	        if (vo.getBp_id().equals(bp_id)) {
+	            session.setAttribute("email", vo.getEmail());
+	            session.setAttribute("authNum", authNum); // 인증번호를 세션에 저장
 
-		            String setfrom = "bomi258@naver.com";
-		            String tomail = email;
-		            String title = "[스윗홈] 비밀번호변경 인증 이메일 입니다";
-		            String content = System.getProperty("line.separator") + "안녕하세요 회원님" + System.getProperty("line.separator")
-		                    + "비밀번호변경 인증번호는 " + authNum + " 입니다." + System.getProperty("line.separator");
-		            try {
-		                MimeMessage message = mailSender.createMimeMessage();
-		                MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "utf-8");
+	            String setfrom = "bomi258@naver.com";
+	            String tomail = email;
+	            String title = "[스윗홈] 비밀번호변경 인증 이메일 입니다";
+	            String content = System.getProperty("line.separator") + "안녕하세요 회원님" + System.getProperty("line.separator")
+	                    + "비밀번호변경 인증번호는 " + authNum + " 입니다." + System.getProperty("line.separator");
+	            try {
+	                MimeMessage message = mailSender.createMimeMessage();
+	                MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "utf-8");
 
-		                messageHelper.setFrom(setfrom); 
-		                messageHelper.setTo(tomail); 
-		                messageHelper.setSubject(title);
-		                messageHelper.setText(content); 
+	                messageHelper.setFrom(setfrom); 
+	                messageHelper.setTo(tomail); 
+	                messageHelper.setSubject(title);
+	                messageHelper.setText(content); 
 
-		                mailSender.send(message); 
-		            } catch (Exception e) {
-		                System.out.println(e.getMessage());
-		            }
+	                mailSender.send(message); 
+	            } catch (Exception e) {
+	                System.out.println(e.getMessage());
+	            }
 
-		            ModelAndView mv = new ModelAndView();
-		            mv.setViewName("/find/checkEmailB");
-		            mv.addObject("msg", "이메일로 인증번호가 발송되었습니다.");
-		            return mv;
-		        } else {
-		            ModelAndView mv = new ModelAndView();
-		            mv.setViewName("/find/pwFindB");
-		            mv.addObject("msg", "등록되지 않은 아이디입니다.");
-		            return mv;
-		        }
-		    } else {
-		        ModelAndView mv = new ModelAndView();
-		        mv.setViewName("/find/pwFindB");
-		        mv.addObject("msg", "등록되지 않은 이메일입니다.");
-		        return mv;
-		    }
-		}
-
-		
-		//이메일 인증번호 확인
-		@RequestMapping(value = "/find/checkEmailB", method = RequestMethod.POST)
-		public ModelAndView checkEmailB(HttpSession session, 
-		        @RequestParam(value="email_injeung") String email_injeung) throws IOException{
-		    ModelAndView mv = new ModelAndView();
-
-		    int authNum = (Integer) session.getAttribute("authNum"); // 세션에서 인증번호를 가져옴
-
-		    if(email_injeung.equals(String.valueOf(authNum))) { // 인증번호 비교
-		        mv.setViewName("/find/pwNewB");
-		        mv.addObject("msg", "인증번호가 일치합니다.");
-		    } else {
-		        mv.setViewName("/find/checkEmailB");
-		        mv.addObject("msg", "인증번호가 일치하지 않습니다.");
-		    }
-		    return mv;
-		}
+	            ModelAndView mv = new ModelAndView();
+	            mv.setViewName("/find/checkEmailB");
+	            mv.addObject("msg", "이메일로 인증번호가 발송되었습니다.");
+	            return mv;
+	        } else {
+	            ModelAndView mv = new ModelAndView();
+	            mv.setViewName("/find/pwFindB");
+	            mv.addObject("msg", "등록되지 않은 아이디입니다.");
+	            return mv;
+	        }
+	    } else {
+	        ModelAndView mv = new ModelAndView();
+	        mv.setViewName("/find/pwFindB");
+	        mv.addObject("msg", "등록되지 않은 이메일입니다.");
+	        return mv;
+	    }
+	}
 
 		
-		@RequestMapping(value = "/find/pwNewB", method = RequestMethod.POST)
-		public String pwNewB(MemberVOB vo, @RequestParam("pw_new_confirm") String pwNewConfirm, HttpSession session, Model model) throws IOException{
-		    if (vo.getBp_pw().equals(pwNewConfirm)) { // 새 비밀번호와 새 비밀번호 확인 값이 일치하는 경우
-		        int result = memberServiceB.pwUpdate(vo);
-		        if(result == 1) {
-		            model.addAttribute("msg", "비밀번호가 변경되었습니다.");
-		            return "/memberB/loginFormB";
-		        }
-		        else {
-		            model.addAttribute("msg", "비밀번호 변경에 실패했습니다.");
-		            return "/find/pwNewB";
-		        }
-		    } else { // 새 비밀번호와 새 비밀번호 확인 값이 일치하지 않는 경우
-		        model.addAttribute("msg", "새 비밀번호와 새 비밀번호 확인 값이 일치하지 않습니다.");
-		        return "/find/pwNewB";
-		    }
-		}
+	//이메일 인증번호 확인
+	@RequestMapping(value = "/find/checkEmailB", method = RequestMethod.POST)
+	public ModelAndView checkEmailB(HttpSession session, 
+	        @RequestParam(value="email_injeung") String email_injeung) throws IOException{
+	    ModelAndView mv = new ModelAndView();
+
+	    int authNum = (Integer) session.getAttribute("authNum"); // 세션에서 인증번호를 가져옴
+
+	    if(email_injeung.equals(String.valueOf(authNum))) { // 인증번호 비교
+	        mv.setViewName("/find/pwNewB");
+	        mv.addObject("msg", "인증번호가 일치합니다.");
+	    } else {
+	        mv.setViewName("/find/checkEmailB");
+	        mv.addObject("msg", "인증번호가 일치하지 않습니다.");
+	    }
+	    return mv;
+	}
+
+	
+	//새 비밀번호 업데이트
+	@RequestMapping(value = "/find/pwNewB", method = RequestMethod.POST)
+	public String pwNewB(MemberVOB vo, @RequestParam("pw_new_confirm") String pwNewConfirm, HttpSession session, Model model) throws IOException{
+	    if (vo.getBp_pw().equals(pwNewConfirm)) { // 새 비밀번호와 새 비밀번호 확인 값이 일치하는 경우
+	        int result = memberServiceB.pwUpdate(vo);
+	        if(result == 1) {
+	            model.addAttribute("msg", "비밀번호가 변경되었습니다.");
+	            return "/memberB/loginFormB";
+	        }
+	        else {
+	            model.addAttribute("msg", "비밀번호 변경에 실패했습니다.");
+	            return "/find/pwNewB";
+	        }
+	    } else { // 새 비밀번호와 새 비밀번호 확인 값이 일치하지 않는 경우
+	        model.addAttribute("msg", "새 비밀번호와 새 비밀번호 확인 값이 일치하지 않습니다.");
+	        return "/find/pwNewB";
+	    }
+	}
 	
 }
