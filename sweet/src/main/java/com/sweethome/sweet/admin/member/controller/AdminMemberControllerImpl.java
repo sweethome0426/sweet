@@ -152,6 +152,23 @@ public class AdminMemberControllerImpl   implements AdminMemberController {
 		ModelAndView mav = new ModelAndView("redirect:/admin/listMembers.do");
 		return mav;
 	}
+	
+	
+	
+	//부동산 API 활용 매매데이터 다운로드
+	@Override
+	@RequestMapping(value="/admin/dataview.do" ,method = RequestMethod.GET)
+	public ModelAndView dataview(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("html/text;charset=utf-8");
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		return mav;
+	}
+	
+	
+	
+	
 
 	private String getViewName(HttpServletRequest request) throws Exception {
 		String contextPath = request.getContextPath();

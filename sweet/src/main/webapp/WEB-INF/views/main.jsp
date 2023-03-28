@@ -97,31 +97,7 @@ request.setCharacterEncoding("UTF-8");
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=623ffaa66ba0d2a47db0ea43e0894646&libraries=clusterer"></script>
 		
 		
-<%-- 		 <c:forEach  var="goods" items="${goodsList}" varStatus="articleNum" > --%>
-<!--      <tr align="center"> -->
-<%-- 	<td width="5%">${articleNum.count}</td> --%>
-<%-- 	<td width="10%">${article.id }</td> --%>
-<!-- 	<td align='left'  width="35%"> -->
-<!-- 	  <span style="padding-right:30px"></span> -->
-<%-- 	   <c:choose> --%>
-<%-- 	      <c:when test='${article.level > 1 }'>   --%>
-<%-- 	         <c:forEach begin="1" end="${article.level }" step="1"> --%>
-<!-- 	              <span style="padding-left:20px"></span>     -->
-<%-- 	         </c:forEach> --%>
-<!-- 	         <span style="font-size:12px;">[답변]</span> -->
-<%--                    <a class='cls1' href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title}</a> --%>
-<%-- 	          </c:when> --%>
-<%-- 	          <c:otherwise> --%>
-<%-- 	            <a class='cls1' href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title }</a> --%>
-<%-- 	          </c:otherwise> --%>
-<%-- 	        </c:choose> --%>
-<!-- 	  </td> -->
-<%-- 	  <td  width="10%">${article.writeDate}</td>  --%>
-<!-- 	</tr> -->
-<%--     </c:forEach> --%>
-    
-    
-		
+
 		
 		
 	<script>
@@ -1352,8 +1328,7 @@ request.setCharacterEncoding("UTF-8");
 		}
 	</script>
 	
-	
-	
+
 	
 	
 </body>

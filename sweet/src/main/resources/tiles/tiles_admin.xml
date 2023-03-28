@@ -8,7 +8,6 @@
    <definition name="/admin/listMembers" extends="baseLayoutA">
       <put-attribute name="title" value="회원목록창" />
       <put-attribute name="body" value="/WEB-INF/views/admin/listMembers.jsp" />
-      <put-attribute name="sideM" value="/WEB-INF/views/admin/listMembers.jsp" />
    </definition>
 
 	
@@ -18,6 +17,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/admin/modMember.jsp"/>
 		
 	</definition>
+	<definition name="/admin/dataview" extends="baseLayoutA">
+      <put-attribute name="title" value="부동산데이터 센터" />
+      <put-attribute name="body" value="/WEB-INF/views/admin/dataview.jsp" />
+   </definition>
 	
 	
 	

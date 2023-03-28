@@ -21,4 +21,5 @@ public interface AdminMemberController {
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView modMember(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response)throws Exception;
 	public ModelAndView updateMember(@ModelAttribute("info") MemberVO memberVO, HttpServletRequest request, HttpServletResponse response)throws Exception;
+	public ModelAndView dataview(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
