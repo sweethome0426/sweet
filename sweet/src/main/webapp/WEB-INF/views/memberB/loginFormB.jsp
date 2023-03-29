@@ -180,7 +180,7 @@ body {
 			<button class="btnon btnon1" type="submit" id="loginBtn">로그인</button>
 		</form>
 		<br>
-		<button class="btnon btnon1" onclick="location.href = '${contextPath}/member/memberForm.do'">회원가입</button>
+		<button class="btnon btnon1" onclick="location.href = '${contextPath}/memberB/memberFormB.do'">회원가입</button>
 		<br>
 		<button class="btnon btnon1" onclick="location.href = '${contextPath}/find/pwFindB'">비밀번호 찾기</button>
 	</div>

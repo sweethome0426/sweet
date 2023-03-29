@@ -47,10 +47,9 @@
  
  	   <insert id="insertMemberB" parameterType="memberVOB">
       <![CDATA[
-         insert into business(bp_id, bp_pw, name, dp_name, email1,
-         email2, addr1, addr2, addr3, tel1,
-         tel2, tel3, hp1, hp2, hp3)
-         values(#{bp_id}, #{bp_pw}, #{name}, #{dp_name}, #{email1}, #{email2},
+         insert into business(bp_id, bp_pw, name, dp_name, email, 
+         addr1, addr2, addr3, tel1, tel2, tel3, hp1, hp2, hp3)
+         values(#{bp_id}, #{bp_pw}, #{name}, #{dp_name}, #{email},
          #{addr1}, #{addr2}, #{addr3},  #{tel1}, #{tel2}, #{tel3},
          #{hp1}, #{hp2}, #{hp3} )
       ]]>
@@ -83,8 +82,7 @@
 	    update business
 	    set bp_pw=#{bp_pw}, 
 	        name=#{name}, 
-	        email1=#{email1},
-	        email2=#{email2},
+	        email=#{email},
 	        addr1=#{addr1},
 	        addr2=#{addr2},
 	        addr3=#{addr3},

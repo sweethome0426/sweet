@@ -85,13 +85,12 @@ function fn_sub(obj){
 			</tr>
 			<tr>
 				<td><p>이메일</p></td>
-				<td><input type="text" name="email1" value="${memberB.email1 }" style="margin-right:10px; width:130px;">
-				<input type="text" name="email2" value="${memberB.email2 }"></td>
+				<td><input type="text" name="email" value="${memberB.email }"></td>
 			</tr>
 			<tr>
 				<td>주소</td>
-				<td><input type="text" id="sample6_postcode" name="addr1" value="${memberB.addr1 }" size="10" style="margin-right:10px; width:110px;">
-				<input type="button" id="zipcodbtn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"> <br>
+				<td><input type="text" id="sample6_postcode" name="addr1" value="${memberB.addr1 }" size="10" style="margin-right:20px; width:110px;">
+				<input type="button" id="zipcodbtn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="margin-bottom:30px;"> <br>
 				<input type="text" id="sample6_address" name="addr2" value="${memberB.addr2 }"  style="margin-right:10px; width:250px;">
 				<input type="text" id="sample6_detailAddress" name="addr3" value="${memberB.addr3 }"></td>
 			</tr>

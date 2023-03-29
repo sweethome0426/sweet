@@ -528,8 +528,7 @@ function execDaumPostcode() {
     
     <div class="sign-input">
       <!-- 바로밑 이름 인풋 타입  -->
-    <input style="width: 150px;" type="text" id="email1" name="email1" class="ia"/>@&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <input style="width: 150px;" type="text" id="email2" name="email2" class="ia"/>
+    <input style="width: 150px;" type="text" id="email" name="email" class="ia"/>
     <select  id="email3" onChange="emailCheck(this.options[this.selectedIndex].value)" title="직접입력" >
     	<option value="non">직접입력</option><!-- 옵션 직접입력 해놓은것 -->
 			<option value="hanmail.net">hanmail.net</option>
