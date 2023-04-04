@@ -21,8 +21,8 @@ public class MessageServiceImpl implements MessageService {
 	
 	//쪽지 목록 보기
 	@Override
-	public List<MessageVO>selectAllMessageList()throws Exception {
-		return messageDAO.selectAllMessageList();
+	public List<MessageVO>selectAllMessageList(String member_id)throws Exception {
+		return messageDAO.selectAllMessageList(member_id);
 	}
 	
 	//쪽지 작성

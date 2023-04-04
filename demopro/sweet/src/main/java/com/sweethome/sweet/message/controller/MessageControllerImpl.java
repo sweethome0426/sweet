@@ -42,8 +42,10 @@ public class MessageControllerImpl implements MessageController {
 	private MessageService messageService;
 	@Autowired
 	private MessageVO messageVO;
-
+	@Autowired
+	private MemberVO memberVO;
 	
+	/*원래 
 	@Override
 	@RequestMapping(value = "/listMessage.do")
 	public ModelAndView selectAllMessageList(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -52,10 +54,46 @@ public class MessageControllerImpl implements MessageController {
 		mav.setViewName("/message/listMessage");
 		mav.addObject("listMessage",listMessage);
 		return mav;
-		//추가 중
-		
+		*/
+	
+	/*
+	@Override
+	@RequestMapping(value = "/listMessage.do", method = RequestMethod.GET)
+	public ModelAndView selectAllMessageList(@RequestParam("member_id") String member_id,
+	                                          HttpServletRequest request, HttpServletResponse response) throws Exception {
+	    String viewName = (String) request.getAttribute("viewName");
+	    ModelAndView mav = new ModelAndView(viewName);
+	    HttpSession session = request.getSession();
+	    memberVO=(MemberVO)session.getAttribute("member");
+	    String loggedInMemberId = memberVO.getMember_id();
+	    
+	    List<MessageVO> listMessage = messageService.selectAllMessageList(loggedInMemberId);
+	    mav.setViewName("/message/listMessage");
+
+	    mav.addObject("listMessage", listMessage);
+	    return mav;
+	}*/
+	
+	@Override
+	@RequestMapping(value = "/listMessage.do", method = RequestMethod.GET)
+	public ModelAndView selectAllMessageList(@RequestParam(value = "member_id", required = false) String member_id,
+	                                          HttpServletRequest request, HttpServletResponse response) throws Exception {
+	    String viewName = (String) request.getAttribute("viewName");
+	    ModelAndView mav = new ModelAndView(viewName);
+	    HttpSession session = request.getSession();
+	    MemberVO memberVO = (MemberVO)session.getAttribute("member");
+	    String loggedInMemberId = memberVO.getMember_id();
+	    
+	    List<MessageVO> listMessage = null;
+	    if (member_id != null && !member_id.equals("")) {
+	        listMessage = messageService.selectAllMessageList(member_id);
+	    } else {
+	        listMessage = messageService.selectAllMessageList(loggedInMemberId);
+	    }
+	    mav.setViewName("/message/listMessage");
+	    mav.addObject("listMessage", listMessage);
+	    return mav;
 	}
-		
 	
 	@RequestMapping(value="/messageForm.do", method=RequestMethod.GET)
 	public String messageForm() throws Exception{

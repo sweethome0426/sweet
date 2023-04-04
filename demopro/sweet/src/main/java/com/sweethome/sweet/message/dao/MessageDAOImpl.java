@@ -18,8 +18,8 @@ public class MessageDAOImpl implements MessageDAO {
 	
 	//쪽지 목록
 	@Override
-	public List<MessageVO>selectAllMessageList() throws Exception {
-		return sqlSession.selectList("mapper.message.selectAllMessageList");
+	public List<MessageVO>selectAllMessageList(String member_id) throws Exception {
+		return sqlSession.selectList("mapper.message.selectAllMessageList",member_id);
 	}
 	//쪽지 쓰기
 	@Override

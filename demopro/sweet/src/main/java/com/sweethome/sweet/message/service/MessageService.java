@@ -7,7 +7,7 @@ import com.sweethome.sweet.message.vo.MessageVO;
 
 public interface MessageService {
 	//쪽지목록
-	public List<MessageVO> selectAllMessageList() throws Exception; 
+	public List<MessageVO> selectAllMessageList(String member_id) throws Exception; 
 	//쪽지쓰기
 	public void insertMessage(MessageVO messageVO) throws Exception;
 	//상세보기 추가

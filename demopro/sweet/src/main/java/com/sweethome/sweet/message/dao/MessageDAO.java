@@ -10,7 +10,7 @@ import com.sweethome.sweet.message.vo.MessageVO;
 public interface MessageDAO {
 	
 	//쪽지 목록
-	public List<MessageVO>selectAllMessageList() throws Exception;
+	public List<MessageVO>selectAllMessageList(String member_id) throws Exception;
 	//쪽지 쓰기
 	public void insertMessage(MessageVO messageVO) throws Exception;
 	//추가

@@ -16,6 +16,6 @@ import com.sweethome.sweet.member.vo.MemberVO;
 
 public interface MessageController {
 	
-	public ModelAndView selectAllMessageList(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView selectAllMessageList(@RequestParam("member_id")  String send_id,HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	
 }

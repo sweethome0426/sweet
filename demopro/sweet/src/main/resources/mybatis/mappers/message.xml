@@ -13,15 +13,18 @@
 	]]>
 	</insert>
 	
-	<!-- 쪽지 조회 -->
+	
+	<!-- 쪽지 조회 수정중 -->
 	<select id="selectAllMessageList" resultType="messageVO" parameterType="String">
 	<![CDATA[
-			select no,send_id,title,writeDate
-			from t_note
-			order by no desc
+			select t_note.no, t_note.send_id, t_note.title, t_note.writeDate
+			from t_note 
+			join member on t_note.send_id = member.member_id
+			where t_note.send_id = #{send_id}
+			order by t_note.no desc
 	]]>
 	</select>
-	
+
 	<!-- 상세 쪽지 불러오기 -->
 	<select id="noteRead" resultType="messageVO" parameterType="String">
 	<![CDATA[
