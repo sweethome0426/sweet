@@ -1,6 +1,7 @@
 package com.sweethome.sweet.goods.vo;
 
 import java.sql.Date;
+import com.sweethome.sweet.memberB.vo.*;
 
 public class GoodsVO {
 	private int goods_id;
@@ -42,6 +43,8 @@ public class GoodsVO {
 	private String addr1;
 	private String addr2;
 	private String region;
+	
+	private MemberVOB memberVOB;
 	
 	public GoodsVO(){}
 

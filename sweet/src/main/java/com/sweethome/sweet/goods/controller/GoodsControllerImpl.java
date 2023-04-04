@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sweethome.sweet.goods.service.GoodsService;
+import com.sweethome.sweet.goods.dao.GoodsDAO;
 import com.sweethome.sweet.goods.vo.GoodsVO;
+import com.sweethome.sweet.memberB.vo.MemberVOB;
 
 import net.sf.json.JSONObject;
 
@@ -27,78 +29,39 @@ public class GoodsControllerImpl implements GoodsController {
 	@Autowired
 	private GoodsService goodsService;
 	
-	@Override
+	/*@Override
 	@RequestMapping(value="/goodsDetail.do" ,method = RequestMethod.GET)
 	public ModelAndView goodsDetail(@RequestParam("goods_id") int goods_id,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String)request.getAttribute("viewName");
-		HttpSession session = request.getSession();
-		Map<String, Object> goodsMap = goodsService.goodsDetail(goods_id);
-		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("goodsMap", goodsMap);
-		GoodsVO goodsVO = (GoodsVO) goodsMap.get("goodsVO");
-		addGoodsInQuick(goods_id, goodsVO, session);
-		return mav;
-	}
-	@Override
-	@RequestMapping(value="/keywordSearch.do",method = RequestMethod.GET,produces = "application/text; charset=utf8")
-	public @ResponseBody String  keywordSearch(@RequestParam("keyword") String keyword,
-			                                  HttpServletRequest request, HttpServletResponse response) throws Exception{
-		response.setContentType("text/html;charset=utf-8");
-		response.setCharacterEncoding("utf-8");
-		//System.out.println(keyword);
-		if(keyword == null || keyword.equals(""))
-		   return null ;
-	
-		keyword = keyword.toUpperCase();
-	    List<String> keywordList =goodsService.keywordSearch(keyword);
+		System.out.println("Call goodsDetail-method of control");
+	    request.setCharacterEncoding("utf-8");
+	    String viewName = "/goodsDetail.do";
+	    System.out.println("viewName : "+viewName);
+
+	 // DB에서 해당 상품 정보를 가져오기
+	    Map<String, Object> goodsVO = goodsService.goodsDetail(goods_id);
 	    
-	 // ���� �ϼ��� JSONObject ����(��ü)
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("keyword", keywordList);
-		 		
-	    String jsonInfo = jsonObject.toString();
-	   // System.out.println(jsonInfo);
-	    return jsonInfo ;
-	}
+	    ModelAndView mav = new ModelAndView();
+	    mav.addObject("goodsVO", goodsVO);
+	    mav.setViewName(viewName);
+	    return mav;
+	}*/
+	
 	@Override
-	@RequestMapping(value="/searchGoods.do" ,method = RequestMethod.GET)
-	public ModelAndView searchGoods(@RequestParam("searchWord") String searchWord,
-			                       HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String viewName=(String)request.getAttribute("viewName");
-		List<GoodsVO> goodsList=goodsService.searchGoods(searchWord);
-		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("goodsList", goodsList);
-		return mav;
-		
+	@RequestMapping(value="/goodsDetail" ,method = RequestMethod.GET)
+	public ModelAndView goodsDetail(@RequestParam("goods_id") int goods_id,
+	                                 HttpServletRequest request, HttpServletResponse response) throws Exception {
+	    System.out.println("Call goodsDetail-method of control");
+	    String viewName=(String)request.getAttribute("viewName");
+	    
+	    HttpSession session=request.getSession();
+	    GoodsVO goodsVO = goodsService.goodsDetail(goods_id);
+	    ModelAndView mav = new ModelAndView(viewName);
+	    mav.addObject("goodsVO", goodsVO);
+	    mav.setViewName(viewName);
+	    return mav;
 	}
 
-	private void addGoodsInQuick(int goods_id,GoodsVO goodsVO,HttpSession session){
-		boolean already_existed=false;
-		List<GoodsVO> quickGoodsList; //�ֱ� �� ��ǰ ���� ArrayList
-		quickGoodsList=(ArrayList<GoodsVO>)session.getAttribute("quickGoodsList");
-		
-		if(quickGoodsList!=null){
-			if(quickGoodsList.size() < 4){ //�̸��� ��ǰ ����Ʈ�� ��ǰ������ ���� ������ ���
-				for(int i=0; i<quickGoodsList.size();i++){
-					GoodsVO _goodsBean=(GoodsVO)quickGoodsList.get(i);
-					if (Integer.valueOf(goods_id).equals(_goodsBean.getGoods_id())){
-						already_existed=true;
-						break;
-					}
-				}
-				if(already_existed==false){
-					quickGoodsList.add(goodsVO);
-				}
-			}
-			
-		}else{
-			quickGoodsList =new ArrayList<GoodsVO>();
-			quickGoodsList.add(goodsVO);
-			
-		}
-		session.setAttribute("quickGoodsList",quickGoodsList);
-		session.setAttribute("quickGoodsListNum", quickGoodsList.size());
-	}
+
 }
 

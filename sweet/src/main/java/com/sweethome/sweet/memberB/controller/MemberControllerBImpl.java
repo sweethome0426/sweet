@@ -125,12 +125,12 @@ public class MemberControllerBImpl implements MemberControllerB {
 							  @RequestParam(value= "action", required=false) String action,
 						       HttpServletRequest request, 
 						       HttpServletResponse response) throws Exception {
-		String viewNameB = (String)request.getAttribute("viewNameB");
+		String viewName = (String)request.getAttribute("viewName");
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);  
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result",result);
-		mav.setViewName(viewNameB);
+		mav.setViewName(viewName);
 		return mav;
 	}
 	
