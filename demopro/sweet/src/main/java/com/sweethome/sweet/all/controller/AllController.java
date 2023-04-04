@@ -13,4 +13,6 @@ import com.sweethome.sweet.member.vo.MemberVO;
 public interface AllController {
 	public ModelAndView customerMain(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView noticeBoard(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	//회사소개
+	public ModelAndView aboutUs(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

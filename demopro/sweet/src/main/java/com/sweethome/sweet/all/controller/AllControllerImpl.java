@@ -42,4 +42,13 @@ public class AllControllerImpl implements AllController {
 		mav.setViewName(viewName);
 		return mav;
 	}
+	
+	@Override
+	@RequestMapping(value = "/customer/aboutUs", method = RequestMethod.GET)
+	public ModelAndView aboutUs(HttpServletRequest request, HttpServletResponse response) {
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
 }

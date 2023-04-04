@@ -12,13 +12,18 @@
    </definition>
 
    <definition name="/customer/customerMain" extends="baseLayout_Customer">
-      <put-attribute name="title_Customer" value="고객 센터" />
+      <put-attribute name="title_Customer" value="고객센터 메인" />
       <put-attribute name="body_Customer" value="/WEB-INF/views/customer/customerMain.jsp" />
    </definition>
    
    <definition name="/customer/noticeBoard" extends="baseLayout_Customer">
-      <put-attribute name="title_Customer" value="고객 센터" />
+      <put-attribute name="title_Customer" value="공지게시판" />
       <put-attribute name="body_Customer" value="/WEB-INF/views/customer/noticeBoard.jsp" />
+   </definition>
+   
+   <definition name="/customer/aboutUs" extends="baseLayout_Customer">
+      <put-attribute name="title_Customer" value="회사소개" />
+      <put-attribute name="body_Customer" value="/WEB-INF/views/customer/aboutUs.jsp" />
    </definition>
    
 </tiles-definitions>

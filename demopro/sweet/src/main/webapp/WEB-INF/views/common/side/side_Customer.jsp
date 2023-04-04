@@ -12,6 +12,6 @@
     <button class="btnon_s1" onclick="location.href = '${contextPath}/customer/noticeBoard.do'">공지사항</button>
     <button class="btnon_s1" onclick="location.href = '#''">계약 및 환불 안내</button>
     
-    <button class="btnon_s1" onclick="location.href = '${contextPath}/customer/aboutUs'">회사 소개</button>
+    <button class="btnon_s1" onclick="location.href = '${contextPath}/customer/aboutUs.do'">회사 소개</button>
 
 </div>

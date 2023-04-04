@@ -89,8 +89,7 @@ public class UserControllerImpl implements UserController {
 		public String deleteUser() throws Exception{
 		return "/user/memberDeleteView";
 		}
-		
-				
+						
 	//È¸¿øÅ»Åð post
 	@RequestMapping(value="/memberDelete.do", method = RequestMethod.POST)
 	public String memberDelete(MemberVO memberVO, HttpSession session, RedirectAttributes rttr) throws Exception{

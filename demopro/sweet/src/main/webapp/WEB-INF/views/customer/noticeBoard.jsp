@@ -46,7 +46,7 @@
 </head>
 
 <body>
-    <h1>Q&A</h1>
+    <h1>공지사항</h1>
     <br>
     <%-- 게시판 목록 --%>
     <section class="article-list table-common con">
