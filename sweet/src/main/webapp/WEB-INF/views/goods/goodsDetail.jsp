@@ -27,6 +27,48 @@ article {
 	margin-right: auto;
 	margin-left: auto;
 }
+/* 전체적인 레이아웃 */
+.goods-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+}
+
+/* 이미지 */
+.goods-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.goods-img img {
+  max-width: 100%;
+  height: auto;
+  margin-right: 10px;
+}
+
+/* 제목 */
+.goods-details h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* 상세 정보 */
+.goods-details p {
+  font-size: 16px;
+  margin-bottom: 5px;
+  line-height: 1.5;
+}
+.goods-details strong {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
 </style>
 
 <body>
@@ -36,9 +78,9 @@ article {
 		
 		<div class="goods-info">
 			<div class="goods-img">
-				<img src="${goodsVO.img1}" alt="${goodsVO.name}">
-				<img src="${goodsVO.img2}" alt="${goodsVO.name}">
-				<img src="${goodsVO.img3}" alt="${goodsVO.name}">
+				<img src="" alt="${goodsVO.name}">
+				<img src="https://img.freepik.com/free-photo/amazing-aerial-shot-of-the-singapore-cityscape-with-lots-of-skyscrapers_181624-18618.jpg?w=1380&t=st=1680597838~exp=1680598438~hmac=52ef8ef6ccd2b7e491f1f451e6a89de3e5dfc3e4d7a925207a95d562d18d674c" alt="${goodsVO.name}">
+				<img src="https://previews.123rf.com/images/interiorpro/interiorpro1705/interiorpro170500026/78418579-%EA%B0%9C%EB%B0%A9%ED%98%95-%EC%95%84%ED%8C%8C%ED%8A%B8-%EB%82%B4%EB%B6%80.jpg" alt="${goodsVO.name}">
 				<img src="${goodsVO.img4}" alt="${goodsVO.name}">
 				<img src="${goodsVO.img5}" alt="${goodsVO.name}">
 				<img src="${goodsVO.img6}" alt="${goodsVO.name}">
