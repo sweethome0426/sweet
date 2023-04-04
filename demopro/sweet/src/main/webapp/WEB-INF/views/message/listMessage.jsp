@@ -59,9 +59,19 @@
 	        </c:forEach>
 	        </tbody>
     	</table>
+    	<br>
+    	<%-- 쓰기 버튼 --%>
+    	 <div class="sub_sps_sch">
+	    	<fieldset>
+	                <legend>버튼</legend>
+		    			<div class="search_box" style= "display:inline-block; float:right;">                   
+		          			<input type="button" value="쪽지 쓰기" class="btn_submit btn_submit_" title="쪽지 쓰기" onclick="location.href = '${contextPath}/message/messageForm.do'">             
+						</div>
+			</fieldset>			
+		 </div>	
       </section>
       
-        <%-- 검색 창 --%>
+        <%-- 검색 창
 
     <br>
     
@@ -85,7 +95,7 @@
 
             </fieldset>
         </form>
-    </div>
+    </div> --%>
 
     <%-- 페이지 넘김 --%>
     <div class="page-box">
