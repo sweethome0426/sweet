@@ -17,6 +17,7 @@
     <title>messageForm</title>
     
     <style>
+    
         /* 쪽지쓰기 */
 
         #noteWrite table {
@@ -68,8 +69,14 @@
 			list-style: none;
 		}
         
-        #note_btn {
-        	text-align:center;
+        #note_btn input[type="submit"], input[type="button"] {
+        	width: 80px;
+   			line-height: 26px;
+   			background-color: #848484;
+    		color: #fff;
+   			text-align: center;
+   			border: 0;
+    		font-size: 15px;
         }
         
         .note {

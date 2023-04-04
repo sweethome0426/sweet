@@ -154,13 +154,13 @@ fieldset{
 }
 
 .sub_sps_sch .btn_submit{
-	width: 60px; 
+	width: 80px; 
 	line-height: 26px; 
 	background-color: #848484; 
 	color: #fff; 
 	text-align: center; 
 	border: 0; 
-	font-size: 13px;
+	font-size: 15px;
 }
 
 /* 셀렉트박스 */
