@@ -55,25 +55,7 @@ public class MessageControllerImpl implements MessageController {
 		mav.addObject("listMessage",listMessage);
 		return mav;
 		*/
-	
-	/*
-	@Override
-	@RequestMapping(value = "/listMessage.do", method = RequestMethod.GET)
-	public ModelAndView selectAllMessageList(@RequestParam("member_id") String member_id,
-	                                          HttpServletRequest request, HttpServletResponse response) throws Exception {
-	    String viewName = (String) request.getAttribute("viewName");
-	    ModelAndView mav = new ModelAndView(viewName);
-	    HttpSession session = request.getSession();
-	    memberVO=(MemberVO)session.getAttribute("member");
-	    String loggedInMemberId = memberVO.getMember_id();
-	    
-	    List<MessageVO> listMessage = messageService.selectAllMessageList(loggedInMemberId);
-	    mav.setViewName("/message/listMessage");
 
-	    mav.addObject("listMessage", listMessage);
-	    return mav;
-	}*/
-	
 	@Override
 	@RequestMapping(value = "/listMessage.do", method = RequestMethod.GET)
 	public ModelAndView selectAllMessageList(@RequestParam(value = "member_id", required = false) String member_id,
@@ -111,7 +93,7 @@ public class MessageControllerImpl implements MessageController {
 	 public String noteRead(@RequestParam int no,Model model) throws Exception {
 	     MessageVO data = messageService.noteRead(no); // no값을 넘김
 	     model.addAttribute("data", data); // model에 데이터 값을 담는다
-	     return "/message/viewMessage"; // board/board_list.jsp로 이동
+	     return "/message/viewMessage"; // message/viewMessage.jsp로 이동
 	}
 	    
 	//삭제

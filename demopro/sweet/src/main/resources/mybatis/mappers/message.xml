@@ -14,17 +14,18 @@
 	</insert>
 	
 	
-	<!-- 쪽지 조회 수정중 -->
+	<!-- 쪽지 조회(사용자) -->
 	<select id="selectAllMessageList" resultType="messageVO" parameterType="String">
 	<![CDATA[
-			select t_note.no, t_note.send_id, t_note.title, t_note.writeDate
-			from t_note 
-			join member on t_note.send_id = member.member_id
-			where t_note.send_id = #{send_id}
-			order by t_note.no desc
+		select t_note.no, t_note.send_id, t_note.recv_id, t_note.title, t_note.writeDate
+		from t_note 
+		join member as send_member on t_note.send_id = send_member.member_id
+		join member as recv_member on t_note.recv_id = recv_member.member_id 
+		where t_note.send_id = #{send_id} or t_note.recv_id = #{recv_id}
+		order by t_note.no desc
 	]]>
 	</select>
-
+	
 	<!-- 상세 쪽지 불러오기 -->
 	<select id="noteRead" resultType="messageVO" parameterType="String">
 	<![CDATA[

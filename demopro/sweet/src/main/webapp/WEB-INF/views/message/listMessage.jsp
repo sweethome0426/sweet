@@ -32,6 +32,18 @@
             return false;
         })
     </script>
+    
+    <style>
+    #note_btn input[type="button"] {
+	    width: 80px;
+	    line-height: 26px;
+	    background-color: #848484;
+	    color: #fff;
+	    text-align: center;
+	    border: 0;
+	    font-size: 15px;
+	}
+    </style>
 
 </head>
 <body>
@@ -42,9 +54,13 @@
     		<thead>
 		        <tr>
 		            <th>번호</th>
-		            <th>작성자</th>
+					<th>보내는사람</th>
+					<th>받는사람</th>
 		            <th>제목</th>
 		            <th>작성일자</th>
+		            <c:if test="${isLogOn==true and member.member_id =='admin'}">
+                     <th>쪽지삭제여부</th>
+                  </c:if>
 		        </tr>
         	</thead>
 			<tbody>
@@ -52,9 +68,17 @@
 		        <tr>
 		            <td>${message.no}</td>
 		            <td>${message.send_id}</td>
+		            <td>${message.recv_id}</td>
 		            <!-- 상세 페이지 추가 -->
 		            <td><a href="${contextPath}/message/read.do?no=${message.no}">${message.title}</a></td>
 					<td>${message.writeDate}</td>
+					<c:if test="${isLogOn==true and member.member_id =='admin'}">
+                     <td>
+                     <div id=note_btn>
+        				<input type="button" value="쪽지삭제" onclick="location.href = '${contextPath}/message/delete.do?no=${data.no}'">
+                     </div>
+                     </td>
+                  </c:if>
 		        </tr>
 	        </c:forEach>
 	        </tbody>

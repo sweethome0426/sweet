@@ -12,6 +12,6 @@
 	<button class="btnon_s1" onclick="location.href = 'listContractB?bp_id=${contractListB.bp_id}'">계약 관리</button>
 	<button class="btnon_s1" onclick="location.href = 'goodsList'">상품 관리</button>
 	<button class="btnon_s1" onclick="location.href = 'QList'">문의 관리</button>
-	<button class="btnon_s1" onclick="location.href = '${contextPath}/message/listMessage.do'">쪽지함</button>
+	<button class="btnon_s1" onclick="location.href = '#'">쪽지함</button>
 	<button class="btnon_s1" onclick="location.href = '#'">회원 탈퇴</button>
 </div>

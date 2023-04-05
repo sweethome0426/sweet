@@ -21,7 +21,7 @@
 	<button class="btnon_C" onclick="location.href = '#'">커뮤니티 관리</button>
 	<button class="btnon_C" onclick="location.href = '#'">고객센터 관리</button>
 	<button class="btnon_C" onclick="location.href = '#'">블랙리스트 관리</button>
-	<button class="btnon_C" onclick="location.href = '#'">쪽지함 관리</button>
+	<button class="btnon_C" onclick="location.href = '${contextPath}/message/listMessage.do'">쪽지함 관리</button>
 	
 	
 	

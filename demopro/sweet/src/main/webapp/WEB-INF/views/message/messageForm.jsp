@@ -103,10 +103,10 @@
             <tbody>
                 <tr>
                     <th scope="row"><label for="send_id">보내는 사람</label>
-                    <td class="send_id"><input type="text" name="send_id" id="send_id"></td>
+                    <td class="send_id"><input type="text" name="send_id" id="send_id" value="${member.member_id}" readonly="readonly"></td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="send_id">받는 사람</label>
+                    <th scope="row"><label for="recv_id">받는 사람</label>
                     <td class="recv_id"><input type="text" name="recv_id" id="recv_id"></td>
                 </tr>
                 <tr>
