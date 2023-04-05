@@ -275,5 +275,17 @@ public class MemberControllerImpl   implements MemberController {
 	        return "redirect:/main.do";
 	    }
 
-
+		//날씨 정보
+		@Override
+		@RequestMapping(value = { "/","/weather.do"}, method = RequestMethod.GET)
+		public ModelAndView weather(HttpServletRequest request, HttpServletResponse response) throws Exception  {
+			request.setCharacterEncoding("utf-8");
+			response.setContentType("html/text;charset=utf-8");
+			String viewName = (String)request.getAttribute("viewName");
+			ModelAndView mav = new ModelAndView();
+			List goodsList = memberService.listGoods();
+			mav.addObject("goodsList", goodsList);
+			mav.setViewName(viewName);
+			return mav;
+		}
 }
