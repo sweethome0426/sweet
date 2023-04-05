@@ -156,7 +156,7 @@
    ]]>
   </select>
   <select id="selectMemberById" resultType="memberVO" parameterType="String">
-<<<<<<< HEAD
+
 		<![CDATA[
 			select * from member where member_id = #{member_id}
 		]]>
@@ -175,25 +175,5 @@
 	<select id="kakaoNumber" parameterType="kakaoDTO" resultType="kakaoDTO">
 		select * from kakao_table where nickname=#{nickname} and email=#{email}
 	</select>
-=======
-      <![CDATA[
-         select * from member where member_id = #{member_id}
-      ]]>
-   </select>
-   
-   
-   <select id="findKakao" parameterType="java.util.HashMap" resultType="kakaoDTO">
-      select * from kakao_table where nickname=#{nickname} and email=#{email}
-   </select>
-   
-   <insert id="kakaoInsert" parameterType="java.util.HashMap">
-      insert into kakao_table(nickname, email)
-         values(#{nickname}, #{email})
-   </insert>
-   
-   <select id="kakaoNumber" parameterType="kakaoDTO" resultType="kakaoDTO">
-      select * from kakao_table where nickname=#{nickname} and email=#{email}
-   </select>
->>>>>>> refs/remotes/origin/김보미
 
 </mapper>

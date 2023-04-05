@@ -71,7 +71,7 @@ function fn_sub(obj){
 <<<<<<< HEAD
 <form name="frm" method="GET" action="${contextPath }/memberB/updateMemberB">
       <table align="center">
-         <c:if test="${memberB != null }">
+         <c:if test="${memberB != null}">
          <tr>
             <td><p>아이디</p></td>
             <td><input type="text" name="bp_id" id="i_id" value="${memberB.bp_id }" readonly></td>
@@ -112,54 +112,8 @@ function fn_sub(obj){
             <td></td>
             <td><input type="button" onClick="fn_sub(this.form)" value="수정완료" style="margin-right:10px;"><input type="reset"></td>
          </tr>
-         
 <!-- 우편번호찾기 -->         
-=======
-<form name="frm" method="post" action="${contextPath }/memberB/updateMemberB">
-		<table align="center">
-			<c:if test="${memberB != null }">
-			<tr>
-				<td><p>아이디</p></td>
-				<td><input type="text" name="bp_id" id="i_id" value="${memberB.bp_id }" readonly></td>
-			</tr>
-			<tr>
-				<td><p>비밀번호</p></td>
-				<td><input type="password" name="bp_pw" value="${memberB.bp_pw }"></td>
-			</tr>
-			<tr>
-				<td><p>이름</p></td>
-				<td><input type="text" name="name" value="${memberB.name }"></td>
-			</tr>
-			<tr>
-				<td><p>이메일</p></td>
-				<td><input type="text" name="email" value="${memberB.email }"></td>
-			</tr>
-			<tr>
-				<td>주소</td>
-				<td><input type="text" id="sample6_postcode" name="addr1" value="${memberB.addr1 }" size="10" style="margin-right:20px; width:110px;">
-				<input type="button" id="zipcodbtn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="margin-bottom:30px;"> <br>
-				<input type="text" id="sample6_address" name="addr2" value="${memberB.addr2 }"  style="margin-right:10px; width:250px;">
-				<input type="text" id="sample6_detailAddress" name="addr3" value="${memberB.addr3 }"></td>
-			</tr>
-			<tr>
-				<td><p>전화번호</p></td>
-				<td><input type="text" id="num" name="tel1" value="${memberB.tel1 }">
-				<input type="text" id="num" name="tel2" value="${memberB.tel2 }">
-				<input type="text" id="num" name="tel3" value="${memberB.tel3 }"></td>
-			</tr>
-			<tr>
-				<td><p>휴대전화</p></td>
-				<td><input type="text" id="num" name="hp1" value="${memberB.hp1 }">
-				<input type="text" id="num" name="hp2" value="${memberB.hp2 }">
-				<input type="text" id="num" name="hp3" value="${memberB.hp3 }"></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><input type="button" onClick="fn_sub(this.form)" value="수정완료" style="margin-right:10px;"><input type="reset"></td>
-			</tr>
-			
-<!-- 우편번호찾기 -->			
->>>>>>> refs/remotes/origin/김보미
+
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function sample6_execDaumPostcode() {
