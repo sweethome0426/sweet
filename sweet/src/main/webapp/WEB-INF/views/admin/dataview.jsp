@@ -40,22 +40,6 @@ table td {
 }
 </style>
 
-<script type="text/javascript">
-	/* Javascript 샘플 코드 */
-
-	// var xhr = new XMLHttpRequest();
-	// var url = 'http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTrade'; /*URL*/
-	// var queryParams = '?' + encodeURIComponent('serviceKey') + '='+'nQbHd%2BiQfZ5yrc902I7Chvzmcp4b6J9f7dJbMfK07aDKE4aKZZLPrLV5NIRpyMji5PiUrQpbrtPGxmfwoqia%2Fw%3D%3D'; /*Service Key*/
-	// queryParams += '&' + encodeURIComponent('LAWD_CD') + '=' + encodeURIComponent('11110'); /**/
-	// queryParams += '&' + encodeURIComponent('DEAL_YMD') + '=' + encodeURIComponent('201512'); /**/
-	// xhr.open('GET', url + queryParams);
-	// xhr.onreadystatechange = function () {
-	//     if (this.readyState == 4) {
-	//         alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
-	//     }
-	// };
-	// xhr.send('');
-</script>
 
 
 </head>
@@ -74,6 +58,7 @@ div.contents {
 	padding-bottom: 10px;
 }
 </style>
+
 <script src="https://code.jquery.com/jquery-latest.min.js"
 	type="application/javascript"></script>
 <script type="application/javascript"
@@ -159,40 +144,22 @@ div.contents {
 				fn_iframe(url);
 				aaa(url);
 			});
-		
 		});
-
-
-
 </script>
-
-
-
-
-<script type="text/javascript">
-	function aaa(url) {
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script>
+	function aaa(url){
+	$(url).ready(function() {
 		$.ajax({
-			url : url,
-			type : 'get',
-			dataType : 'xml',
-			beforeSend : function() {
-
-				if ($(result).find('건축년도').length > 0) {
-
-					alert('xml 파싱 중 성공이 발생 되었습니다.');
-
-				} else {
-					alert( 'xml 파싱 중 오류가 발생 되었습니다.' );
-				}
-
+			url: url,
+			type: 'GET',
+			success: function(url) {
+				console.log(url);
 			}
 		})
-	};
+	});
+	}
 </script>
-
-
-
-
 
 </head>
 <body>
