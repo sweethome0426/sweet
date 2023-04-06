@@ -83,11 +83,6 @@ width:130;height:30;  /*--버튼 크기---*/
 
 
 
-<<<<<<< HEAD
-   
-=======
-	
->>>>>>> refs/remotes/origin/김진영
 </style>
  
 <script type="text/javascript">
@@ -102,15 +97,6 @@ width:130;height:30;  /*--버튼 크기---*/
 			밑에 보면 this.form 이있다다
 */
 function fn_sub(obj){
-<<<<<<< HEAD
-   document.getElementById("i_id").disabled=false;
-   if(confirm("회원수정 하시겠습니까?") == true) {
-      alert("회원수정 완료되었습니다.")
-   }else {
-      return;
-   }
-   obj.submit();
-=======
 	document.getElementById("i_id").disabled=false;
 	if(confirm("회원수정 하시겠습니까?") == true) {
 		alert("회원수정 완료되었습니다.")
@@ -118,7 +104,7 @@ function fn_sub(obj){
 		return;
 	}
 	obj.submit();
->>>>>>> refs/remotes/origin/김진영
+
 }
 			// 여기 밑에는 회원정지시키는 함수
 function fn_sub2(obj) {
@@ -153,27 +139,7 @@ function fn_sub2(obj) {
 <div>
    <h2 style="color: #495295;">&nbsp;<b>${member.name } 님의 회원정보 수정</b></h2>
 </div>
-<<<<<<< HEAD
-=======
-	
-<table class="type11">
-	
-	<c:if test="${member != null }">
-	
-  <thead>
-	  <tr>
-	   
-	    <th scope="cols">회원아이디</th>
-	    <th scope="cols">비밀번호</th>
-	    <th scope="cols">이름</th>
-	    <th scope="cols">생년월일</th>
-	    <th scope="cols">이메일</th>
-	    <th scope="cols">휴대전화</th>
-	    
-	   </tr>
->>>>>>> refs/remotes/origin/김진영
-   
-<<<<<<< HEAD
+
 <table class="type11">
    
    <c:if test="${member != null }">
@@ -217,51 +183,7 @@ function fn_sub2(obj) {
        <th scope="cols">상세주소</th>
        
      </tr>
-=======
-	    <tr>
-	    
-	    <td><input type="text" name="member_id" id="i_id" value="${member.member_id }" readonly></td>
-	    <td><input type="text" name="member_pw" value="${member.member_pw }"></td>
-	    <td><input type="text" name="name" value="${member.name }"></td>
-	    <td><input type="date" name="member_birth" value="${member.member_birth }"></td>
-	    <td style="width: 400px;">
-	    <input style="width: 70px;" type="text" name="email1" value="${member.email1 }">@
-	    <input style="width: 70px;" type="text" name="email2" value="${member.email2 }">
-	    </td>
-	    <td>
-	    <input style="width: 40px;" type="text" name="hp1" value="${member.hp1 }">-
-	    <input style="width: 40px;" type="text" name="hp2" value="${member.hp2 }">-
-	    <input style="width: 40px;" type="text" name="hp3" value="${member.hp3 }">
-	    </td>
-	    
-	  </tr>
-	  
-	   <tr>
-	    <th scope="cols">전화번호</th>
-	    <th scope="cols">회원상태</th>
-	    <th scope="cols">거래금액</th>
-	    <th scope="cols">우편주소</th>
-	    <th scope="cols">주소</th>
-	    <th scope="cols">상세주소</th>
-	    
-	  </tr>
->>>>>>> refs/remotes/origin/김진영
-  
-<<<<<<< HEAD
-     <tr>
-       <td>
-       <input style="width: 40px;" type="text" name="tel1" value="${member.tel1 }">-
-       <input style="width: 40px;" type="text" name="tel2" value="${member.tel2 }">-
-       <input style="width: 40px;" type="text" name="tel3" value="${member.tel3 }">
-       </td>
-       
-       <td><input type="text" name="status" value="${member.status }"></td>
-       <td><input type="text" value="0원"></td>
-       <td><input type="text" name="addr1" value="${member.addr1 }"></td>
-       <td><input type="text" name="addr2" value="${member.addr2 }"></td>
-       <td><input type="text" name="addr3" value="${member.addr3 }"></td>
-     </tr>
-=======
+
 	  <tr>
 	    <td>
 	    <input style="width: 40px;" type="text" name="tel1" value="${member.tel1 }">-
@@ -275,22 +197,15 @@ function fn_sub2(obj) {
 	    <td><input type="text" name="addr2" value="${member.addr2 }"></td>
 	    <td><input type="text" name="addr3" value="${member.addr3 }"></td>
 	  </tr>
->>>>>>> refs/remotes/origin/김진영
+
   
   </thead>
 
    </c:if>
    
 </table>
-
-<<<<<<< HEAD
- <div class="d1">
-   <input class="button" type="button" onClick="fn_sub(this.form)" value="수정하기">&nbsp;&nbsp;
-    <input class="button" type="button" onClick="#" value="회원정지">&nbsp;&nbsp;
-    <input class="button" type="button" onClick="#" value="회원정지해제">&nbsp;&nbsp;
-   <input class="button"  type="reset">
    
-=======
+
  <div class="d1">						<!--  수정 누를시 함수 실행된다. 위에 있음 -->
 	<input class="button" type="button" onClick="fn_sub(this.form)" value="수정하기">&nbsp;&nbsp;
 	 										<!-- 정지를 누르면 실행. -->
@@ -299,7 +214,7 @@ function fn_sub2(obj) {
 	 <input class="button" type="button" onClick="#" value="회원정지해제">&nbsp;&nbsp;
 	<input class="button"  type="reset">
 	
->>>>>>> refs/remotes/origin/김진영
+
  </div>
 
    

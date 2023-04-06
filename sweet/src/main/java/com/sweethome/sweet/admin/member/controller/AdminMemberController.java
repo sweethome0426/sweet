@@ -38,6 +38,7 @@ public interface AdminMemberController {
 	
 				// stop여기는 회원정지 시키려고~
 	public ModelAndView stopMember(@ModelAttribute("info") MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	ModelAndView dataview(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	
 	

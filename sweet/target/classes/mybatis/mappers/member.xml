@@ -115,40 +115,6 @@
       where member_id = #{id}
    </select>
    
-   
-   
-   
-
-<<<<<<< HEAD
-      <!-- update member set member_join=#{member_join}, member_id=#{member_id}, member_pw=#{member_pw}, name=#{name}, 
-      member_birth=#{member_birth}, email=#{email}, hp1=#{hp1}, tel1=#{tel1}, status=#{status}, 
-      addr1=#{addr1}, join_date=#{join_date} where member_id=#{member_id} -->
-   
-   <!-- 회원 수정하기위한 쿼리 구문 아직 완성이다 아마 -->
-   <update id="updateMember" parameterType="memberVO">
-      <![CDATA[
-         UPDATE member SET
-         member_id=#{member_id},
-         member_pw=#{member_pw},
-         name=#{name},
-         member_birth=#{member_birth},
-         email1=#{email1},
-         email2=#{email2},
-         hp1=#{hp1},
-         hp2=#{hp2},
-         hp3=#{hp3},
-         tel1=#{tel1},
-         tel2=#{tel2},
-         tel3=#{tel3},
-         status=#{status},
-         addr1=#{addr1},
-         addr2=#{addr2},
-         addr3=#{addr3}
-         WHERE member_id=#{member_id}
-      ]]>
-   </update>
-   
-=======
 		<!-- update member set member_join=#{member_join}, member_id=#{member_id}, member_pw=#{member_pw}, name=#{name}, 
 		member_birth=#{member_birth}, email=#{email}, hp1=#{hp1}, tel1=#{tel1}, status=#{status}, 
 		addr1=#{addr1}, join_date=#{join_date} where member_id=#{member_id} -->
@@ -189,9 +155,6 @@
 			status=#{status} WHERE member_id=#{member_id} 
 		]]>
 	</update>
-	
->>>>>>> refs/remotes/origin/김진영
-
 
   <select id="loginById"  resultType="memberVO"   parameterType="memberVO" >
    <![CDATA[
@@ -200,26 +163,7 @@
    ]]>
   </select>
   <select id="selectMemberById" resultType="memberVO" parameterType="String">
-<<<<<<< HEAD
-      <![CDATA[
-         select * from member where member_id = #{member_id}
-      ]]>
-   </select>
-   
-   
-   <select id="findKakao" parameterType="java.util.HashMap" resultType="kakaoDTO">
-      select * from kakao_table where nickname=#{nickname} and email=#{email}
-   </select>
-   
-   <insert id="kakaoInsert" parameterType="java.util.HashMap">
-      insert into kakao_table(nickname, email)
-         values(#{nickname}, #{email})
-   </insert>
-   
-   <select id="kakaoNumber" parameterType="kakaoDTO" resultType="kakaoDTO">
-      select * from kakao_table where nickname=#{nickname} and email=#{email}
-   </select>
-=======
+
 		<![CDATA[
 			select * from member where member_id = #{member_id}
 		]]>
@@ -238,6 +182,6 @@
 	<select id="kakaoNumber" parameterType="kakaoDTO" resultType="kakaoDTO">
 		select * from kakao_table where nickname=#{nickname} and email=#{email}
 	</select>
->>>>>>> refs/remotes/origin/김진영
+
 
 </mapper>

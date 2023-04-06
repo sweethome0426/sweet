@@ -89,42 +89,12 @@ request.setCharacterEncoding("UTF-8");
 	<div id="map" style="width: 1180px; height: 700px;"></div>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script >
-		
-		
+	<script>
 		</script>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=623ffaa66ba0d2a47db0ea43e0894646&libraries=clusterer"></script>
-		
-		
-<%-- 		 <c:forEach  var="goods" items="${goodsList}" varStatus="articleNum" > --%>
-<!--      <tr align="center"> -->
-<%-- 	<td width="5%">${articleNum.count}</td> --%>
-<%-- 	<td width="10%">${article.id }</td> --%>
-<!-- 	<td align='left'  width="35%"> -->
-<!-- 	  <span style="padding-right:30px"></span> -->
-<%-- 	   <c:choose> --%>
-<%-- 	      <c:when test='${article.level > 1 }'>   --%>
-<%-- 	         <c:forEach begin="1" end="${article.level }" step="1"> --%>
-<!-- 	              <span style="padding-left:20px"></span>     -->
-<%-- 	         </c:forEach> --%>
-<!-- 	         <span style="font-size:12px;">[답변]</span> -->
-<%--                    <a class='cls1' href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title}</a> --%>
-<%-- 	          </c:when> --%>
-<%-- 	          <c:otherwise> --%>
-<%-- 	            <a class='cls1' href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title }</a> --%>
-<%-- 	          </c:otherwise> --%>
-<%-- 	        </c:choose> --%>
-<!-- 	  </td> -->
-<%-- 	  <td  width="10%">${article.writeDate}</td>  --%>
-<!-- 	</tr> -->
-<%--     </c:forEach> --%>
-    
-    
-		
-		
-		
-	<script>
+
+	<script type="text/javascript">
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapCenter = new kakao.maps.LatLng(36.349229, 127.377619), // 지도의 중심 좌표
 		mapOption = {
@@ -132,23 +102,25 @@ request.setCharacterEncoding("UTF-8");
 			level : 11
 		// 지도의 확대 레벨
 		};
-
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 		var map = new kakao.maps.Map(mapContainer, mapOption);
-		map.setMapTypeId(kakao.maps.MapTypeId.SKYVIEW);
-			
-		const locations = [
-			{
-				content : '<div class="overlay_info">'
-						+ '    <a href="${contextPath}/goods/goodsDetail.do?goods_id=1" target="_blank"><strong>건대입구역</strong></a>'
-						+ '    <div class="desc">'
-						+ '        <img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/place_thumb.png" alt="">'
-						+ '        <span class="address">드디어!!!!!</span>'
-						+ '    </div>' + '</div>',
-				lat : 36.349229,
-				lng : 127.377619
-			}
-				];
+		map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);
+
+		var locations = [];
+		
+		<c:forEach var="goods" items="${goodsList}" >
+  locations.push({
+    content: `<div class="overlay_info">`
+           + `  <a href="${contextPath}/goods/goodsDetail?goods_id=${goods.goods_id}" target="_blank"><strong>${goods.name}</strong></a>`
+           + `  <div class="desc">`
+           + `    <img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/place_thumb.png" alt="">`
+           + `    <span class="address">${goods.addr1}</span>`
+           + `  </div>` 
+           + `</div>`,
+           lat : ${goods.location_x},
+		   lng : ${goods.location_y}
+  });
+  </c:forEach>
 		
 		// 마커 클러스터러를 생성합니다
 		var clusterer = new kakao.maps.MarkerClusterer({
@@ -197,10 +169,13 @@ request.setCharacterEncoding("UTF-8");
 			};
 		}
 	</script>
-	
-	
-	
-	
-	
+
+	<c:forEach var="goodslist" items="${goodsList}">
+	</c:forEach>
+
+
+
+
+
 </body>
 </html>

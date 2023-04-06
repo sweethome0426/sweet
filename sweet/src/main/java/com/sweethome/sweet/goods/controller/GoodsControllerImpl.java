@@ -52,7 +52,7 @@ public class GoodsControllerImpl implements GoodsController {
 	public ModelAndView goodsDetail(@RequestParam("goods_id") int goods_id,
 	                                 HttpServletRequest request, HttpServletResponse response) throws Exception {
 	    System.out.println("Call goodsDetail-method of control");
-	    String viewName=(String)request.getAttribute("viewName");
+	    String viewName="/goods/goodsDetail";
 	    
 	    HttpSession session=request.getSession();
 	    GoodsVO goodsVO = goodsService.goodsDetail(goods_id);

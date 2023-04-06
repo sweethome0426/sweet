@@ -1,5 +1,7 @@
 package com.sweethome.sweet.member.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -23,7 +25,7 @@ public interface MemberController {
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView modMember(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response)throws Exception;
 	public ModelAndView updateMember(@ModelAttribute("info") MemberVO memberVO, HttpServletRequest request, HttpServletResponse response)throws Exception;
-	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public Map<String, Object> main(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public String kakaoLogin(String code, Model model) throws Exception;
 	public ResponseEntity overlapped(String id, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
