@@ -16,7 +16,7 @@ public interface UserController {
 	//회원정보조회
 	public ModelAndView userDetailInfo(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView watchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public ModelAndView userContract(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	/*public ModelAndView userContract(HttpServletRequest request, HttpServletResponse response) throws Exception;*/
 
 }
 

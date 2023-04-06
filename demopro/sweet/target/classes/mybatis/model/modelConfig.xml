@@ -15,6 +15,8 @@
 		<typeAlias type="com.sweethome.sweet.memberB.vo.ContractVO"  alias="contractVO" />
 		<!-- 메세지 -->
 		<typeAlias type="com.sweethome.sweet.message.vo.MessageVO" alias="messageVO"/>
+		<!-- 계약내역 -->
+		<typeAlias type="com.sweethome.sweet.goodscontract.vo.GoodsContractVO" alias="goodsContractVO"/>
 	</typeAliases>
 	
 	

@@ -182,40 +182,33 @@ color: white;
     <table style="border:1px solid black;margin-left:auto;margin-right:auto;">
       <thead>
         <tr>
-          <th>이미지</th>
-          <th>상태</th>
-          <th>건물이름</th>
-          <th>주소</th>
-          <th>계약중개사</th>
-          <th>계약일</th>
-
+        <!--  
+          <th>이미지</th> -->
+          <th>goodscon_id</th>
+          <th>goods_id</th>
+          <th>사용자아이디</th>
+          <th>사업자아이디</th>
+          <th>가격</th>
+          <th>계약일자</th>
+          <th>거래지역</th>
+		  <th>계약상태</th>
         </tr>
       </thead>
       <tbody>
+      	<c:forEach var="usercontract" items="${userContract}">
         <tr>
-          <td><img src="#" alt="상품1" onclick="goodsDetail()"></td>
-          <td>계약 완료</td>
-          <td>목련아파트</td>
-          <td>서구 둔산동</td>
-          <td>샛별부동산</td>
-          <td>2023-03-10</td>
+        <!--  
+          <td><img src="#" alt="상품1" onclick="goodsDetail()"></td> -->
+         	<td>${usercontract.goodscon_id}</td>
+         	<td>${usercontract.goods_id}</td>
+         	<td>${usercontract.member_id}</td>
+         	<td>${usercontract.bp_id}</td>
+         	<td>${usercontract.price}</td>
+         	<td>${usercontract.sale_date}</td>
+         	<td>${usercontract.region}</td>
+         	<td>${usercontract.state}</td>
         </tr>
-         <tr>
-          <td><img src="#" alt="상품1" onclick="goodsDetail()"></td>
-          <td>계약 완료</td>
-          <td>목련아파트</td>
-          <td>서구 둔산동</td>
-          <td>샛별부동산</td>
-          <td>2023-03-10</td>
-        </tr>
-         <tr>
-          <td><img src="#" alt="상품1" onclick="goodsDetail()"></td>
-          <td>계약 완료</td>
-          <td>목련아파트</td>
-          <td>서구 둔산동</td>
-          <td>샛별부동산</td>
-          <td>2023-03-10</td>
-        </tr>
+    	</c:forEach>
       </tbody>
       </table>
   </body>

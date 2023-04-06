@@ -66,6 +66,7 @@ public class UserControllerImpl implements UserController {
 		return "redirect:/user/userDetailInfo.do";
 	}
 	
+	/*contract로 옮겨감
 	@Override
 	@RequestMapping(value = "/userContract.do", method = RequestMethod.GET)
 	public ModelAndView userContract(HttpServletRequest request, HttpServletResponse response) {
@@ -73,7 +74,7 @@ public class UserControllerImpl implements UserController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		return mav;
-	}
+	}*/
 
 	@Override
 	@RequestMapping(value = "/watchList.do", method = RequestMethod.GET)

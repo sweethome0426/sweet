@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="mapper.goodscontract">
+
+	<!-- 계약내역 조회(사용자) -->
+	<select id="selectAllGoodsContractList" resultType="goodsContractVO" parameterType="String">
+	<![CDATA[
+		select * 
+		from goods_contract 
+		join goods on goods_contract.goods_id = goods.goods_id
+		join business on goods_contract.bp_id = business.bp_id
+		join member on goods_contract.member_id = member.member_id
+		where goods_contract.goods_id = #{goods_id}
+		or goods_contract.bp_id = #{bp_id}
+		or goods_contract.member_id = #{member_id}
+		order by goods_contract.goodscon_id desc
+	]]>
+	</select>
+</mapper>

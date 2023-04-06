@@ -1,4 +1,4 @@
-package com.sweethome.sweet.message.controller;
+package com.sweethome.sweet.goodscontract.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,11 +11,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.sweethome.sweet.member.vo.MemberVO;
+import com.sweethome.sweet.goodscontract.vo.GoodsContractVO;
 
+public interface GoodsContractController {
+	
+	public ModelAndView selectAllGoodsContractList(@RequestParam("member_id")String member_id,HttpServletRequest request, HttpServletResponse response)  throws Exception;
 
-public interface MessageController {
-	
-	public ModelAndView selectAllMessageList(@RequestParam("member_id")String send_id,HttpServletRequest request, HttpServletResponse response)  throws Exception;
-	
 }
