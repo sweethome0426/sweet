@@ -68,17 +68,17 @@
             sb.append(String.format("<tr>"));
             sb.append(String.format("<td>%s</td>", tmEf));
             String img = "";
-            switch(wf){
-            case "맑음": img = "1.png"; break;
-            case "흐림": img = "W_DB04.png"; break;
-            case "비": img = "W_DB05.png"; break;
-            case "비,눈": img = "W_DB06.png"; break;
-            case "눈": img = "W_DB08.png"; break;
-            case "구름조금": img = "W_NB02.png"; break;
-            case "구름많음": img = "W_NB03.png"; break;
-            case "흐리고 비": img = "W_NB08.png"; break;
-            case "구름많고 비": img = "W_NB20.png"; break;
-            }
+//             switch(wf){
+//             case "맑음": img = "1.png"; break;
+//             case "흐림": img = "W_DB04.png"; break;
+//             case "비": img = "W_DB05.png"; break;
+//             case "비,눈": img = "W_DB06.png"; break;
+//             case "눈": img = "W_DB08.png"; break;
+//             case "구름조금": img = "W_NB02.png"; break;
+//             case "구름많음": img = "W_NB03.png"; break;
+//             case "흐리고 비": img = "W_NB08.png"; break;
+//             case "구름많고 비": img = "W_NB20.png"; break;
+//             }
             sb.append(String.format("<img src=\""+ path +"/resources/img/%s\">", img));
             sb.append(String.format("<td>%s / %s</td>", tmn, tmx));
             sb.append(String.format("<td>%s</td>", reliability));
