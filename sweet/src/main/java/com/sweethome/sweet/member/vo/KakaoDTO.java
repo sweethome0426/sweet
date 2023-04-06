@@ -9,7 +9,7 @@ import lombok.Data;
 public class KakaoDTO {
 
 	private long number;
-	private String name;
+	private String nickname;
 	private String email;
 	
 	public long getnumber() {
@@ -19,10 +19,10 @@ public class KakaoDTO {
 		this.number = number;
 	}
 	public String getname() {
-		return name;
+		return nickname;
 	}
-	public void setname(String name) {
-		this.name = name;
+	public void setname(String nickname) {
+		this.nickname = nickname;
 	}
 	public String getemail() {
 		return email;

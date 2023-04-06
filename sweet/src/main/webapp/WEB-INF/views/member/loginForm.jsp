@@ -182,13 +182,14 @@ body {
 				<button class="btnon btnon1" type="submit">로그인</button>
 				<br>
 				<br>
-				<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=0277d6bc4e92f1576c2507eec6edcbdb&redirect_uri=http://localhost:8080/sweet/kakaoLogin&response_type=code">
+				<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=0277d6bc4e92f1576c2507eec6edcbdb&redirect
+				_uri=http://localhost:8080/sweet/kakaoLogin&response_type=code">
         <img src="${contextPath}/resources/image/kakao_login.png" alt="카카오계정 로그인" style="width:260px; height: 50px;"/>
                     </a>
                 </div>
 			</form>
 			<br>
-			<button class="btnon btnon1" onclick="location.href = '#'">회원가입</button>
+			<button class="btnon btnon1" onclick="location.href = '${contextPath}/member/memberForm.do'">회원가입</button>
 			<br>
 			<button class="btnon btnon1" onclick="location.href = '#'">아이디/비밀번호
 				찾기</button>
