@@ -27,4 +27,6 @@ public interface MemberController {
 	public String kakaoLogin(String code, Model model) throws Exception;
 	public ResponseEntity overlapped(String id, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
+	public ModelAndView weather(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 }
