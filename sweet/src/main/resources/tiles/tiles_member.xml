@@ -64,6 +64,7 @@
       <put-attribute name="title" value="회원상세창" />
       <put-attribute name="body" value="/WEB-INF/views/admin/viewDetail.jsp" />
    </definition> 
+<<<<<<< HEAD
    
    <!-- 날씨정보 -->
    <definition name="weather" extends="baseLayout">
@@ -71,4 +72,10 @@
       <put-attribute name="body" value="/WEB-INF/views/weather.jsp" />
       <put-attribute name="side" value=""/>
    </definition>
+=======
+   		
+   
+   
+   
+>>>>>>> refs/remotes/origin/김진영
 </tiles-definitions>

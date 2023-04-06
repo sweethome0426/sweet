@@ -47,6 +47,7 @@ public class MemberVO {
 					String hp1,
 					String hp2,
 					String hp3,
+					String status,
 					String member_birth) {
 		this.member_id = member_id;
 		this.member_pw = member_pw;
@@ -62,6 +63,7 @@ public class MemberVO {
 		this.hp1 = hp1;
 		this.hp2 = hp2;
 		this.hp3 = hp3;
+		this.status = status;
 		this.member_birth = member_birth;
 	}
 

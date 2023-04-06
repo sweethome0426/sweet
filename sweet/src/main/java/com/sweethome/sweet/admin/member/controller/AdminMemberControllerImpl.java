@@ -30,8 +30,8 @@ public class AdminMemberControllerImpl   implements AdminMemberController {
 	private MemberVO memberVO ;
 	
 	
-	@Override
-	@RequestMapping(value="/admin/listMembers.do" ,method = RequestMethod.GET)
+	@Override				// 관리자 회원관리 회원 목록들 listMembers.do 하면여기로 
+	@RequestMapping(value="/admin/listMembers.do" ,method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("html/text;charset=utf-8");
@@ -101,7 +101,7 @@ public class AdminMemberControllerImpl   implements AdminMemberController {
 	return mav;
 	}
 	
-	@Override
+	@Override	 // 회원수정 페이지 로 오게되면 여기 실행 modMember.do 여기
 	@RequestMapping(value="/admin/modMember.do", method=RequestMethod.GET)
 	public ModelAndView modMember(@RequestParam("id") String member_id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -142,7 +142,7 @@ public class AdminMemberControllerImpl   implements AdminMemberController {
 	}
 	
 
-	@Override
+	@Override				// 회원 수정을 위해서 여기를 들린다. 
 	@RequestMapping(value="/admin/updateMember.do", method = RequestMethod.POST)
 	public ModelAndView updateMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response)throws Exception{
 		System.out.println("Call updateMember-method of control");
@@ -152,6 +152,20 @@ public class AdminMemberControllerImpl   implements AdminMemberController {
 		ModelAndView mav = new ModelAndView("redirect:/admin/listMembers.do");
 		return mav;
 	}
+	
+	// 여기는 회원정지 하기 위함 회원 정지 누를시 여기로 오게된다. .do 실행되면
+	@Override
+	@RequestMapping(value="/admin/stopMember.do", method = RequestMethod.POST)
+	public ModelAndView stopMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response)throws Exception {
+		System.out.println("여기 스탑 멤버 컨트롤 이게 보이면 여기까지는 오는거다. stopMember-method of control");
+		request.setCharacterEncoding("utf-8");
+		member.setStatus("정지");		// 컨트롤러 실행되면 memberVO의 Status가 저걸로 정지 가 저장됨
+		int result = 0;
+		result = adminMemberService.stopMember(member);
+		ModelAndView mav = new ModelAndView("redirect:/admin/listMembers.do"); //여기 페이지로 이동된다.
+		return mav;
+	}
+	
 
 	private String getViewName(HttpServletRequest request) throws Exception {
 		String contextPath = request.getContextPath();

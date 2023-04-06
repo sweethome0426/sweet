@@ -155,6 +155,10 @@ body {
 
 <body>
 <h1>로그인</h1>
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/김진영
 <main class="hc">
 	<h2>로그인</h2>
 	<hr>

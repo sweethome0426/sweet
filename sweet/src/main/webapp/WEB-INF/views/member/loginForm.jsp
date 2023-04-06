@@ -189,7 +189,7 @@ body {
                 </div>
 			</form>
 			<br>
-			<button class="btnon btnon1" onclick="location.href = '#'">회원가입</button>
+			<button class="btnon btnon1" onclick="location.href = '${contextPath}/member/memberForm.do'">회원가입</button>
 			<br>
 			<button class="btnon btnon1" onclick="location.href = '#'">아이디/비밀번호
 				찾기</button>
