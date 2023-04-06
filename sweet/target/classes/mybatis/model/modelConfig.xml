@@ -16,5 +16,8 @@
 		<!-- 상품 -->
 		<typeAlias type="com.sweethome.sweet.goods.vo.GoodsVO"  alias="goodsVO" />
 		<typeAlias type="com.sweethome.sweet.goods.vo.ImageFileVO"  alias="imageFileVO" />
+		
+		<!-- 주문 -->
+		<typeAlias type="com.sweethome.sweet.order.vo.OrderVO"  alias="orderVO" />
 	</typeAliases>
 </configuration>

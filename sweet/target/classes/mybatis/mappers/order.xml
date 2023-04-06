@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.order">
+<!-- 리절트 맵 정의 -->	
+	<resultMap id="orderGoodsResult" type="OrderVO">
+	    <result property="procon_id" column="procon_id" />
+		<result property="product_id" column="product_id" />
+		<result property="member_id" column="member_id" />
+		<result property="bp_id" column="bp_id" />
+		<result property="price" column="price" />
+		<result property="sale_date" column="sale_date" />
+		<result property="region" column="region" />
+		<result property="state" column="state" />
+	</resultMap>
+	
+	 <select id="selectMyOrderList" resultMap="orderGoodsResult"  parameterType="orderVO"  >
+	    <![CDATA[
+			select * from t_shopping_order
+			where to_char(pay_order_time,'yyyy-mm-dd')=to_char(sysdate,'yyyy-mm-dd') 
+        	and member_id=#{member_id}
+        	order by ORDER_SEQ_NUM
+		]]>
+	</select>
+	<insert id="insertNewOrder" parameterType="orderVO"  >
+	    <selectKey resultType="int" keyProperty="ORDER_SEQ_NUM" order="BEFORE">
+	    	select ifnull(max(order_id),0)+ 1 from t_shopping_order
+	    </selectKey>
+	    <![CDATA[
+			insert into goods_order(goodscon_id,
+			                            goods_id,
+										member_id,
+									    bp_id,
+									    price,
+									    sale_date,
+									    region)
+							     values(#{goodscon_id},
+							            #{goods_id},
+									    #{member_id},
+									    #{bp_id},
+									    #{price},
+									    #{sale_date},
+									    #{region})
+    	]]>
+	</insert>
+
+   <select id="selectOrderID" resultType="int" parameterType="orderVO">
+	    <![CDATA[
+		    select ifnull(max(order_id),0)+ 1 from t_shopping_order
+    	]]>
+	</select>
+	
+	<select id="selectMyOrder" resultMap="orderGoodsResult"   parameterType="String"  >
+	    <![CDATA[
+		    select * from t_shopping_order
+            where to_char(pay_order_time,'yyyy-mm-dd')=to_char(sysdate,'yyyy-mm-dd') 
+            and order_id=#{order_id}
+            order by pay_order_time desc
+    	]]>
+	</select>
+	
+	<delete id="deleteGoodsFromCart" parameterType="orderVO">
+	  delete from t_shopping_cart
+	  where goods_id=#{goods_id}
+	</delete>
+	
+</mapper>

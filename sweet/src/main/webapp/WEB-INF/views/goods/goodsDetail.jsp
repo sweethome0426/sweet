@@ -9,11 +9,18 @@
 </head>
 
 <style>
-main {
-	padding: 20px;
+form {
+border: 1px solid #ccc;
+border-radius: 4px;
+margin: 2rem auto;
+max-width: 600px;
+padding: 2rem;
 }
-h2 {
-	text-align: center;
+p {
+display: block;
+font-size: 1rem;
+font-weight: bold;
+margin-bottom: 0.5rem;
 }
 article {
 	margin: 00px 0px 0px 15px; width: 1350px; float: left;
@@ -69,13 +76,35 @@ article {
   margin-right: 5px;
 }
 
+/* 버튼 */
+.btnon1 {
+	width: 260px;
+	margin-top: 5px;
+	background-color: #ffffff;
+	color: #112d4e;
+	border: 1px #112d4e solid;
+}
+
+.btnon1:hover {
+	width: 260px;
+	height: 35px;
+	margin-top: 5px;
+	border: none;
+	border-radius: 4px;
+	font-size: 13px;
+	font-weight: bold;
+	background-color: #112d4e;
+	color: white;
+}
 </style>
 
 <body>
 
 <h1>부동산 정보 상세페이지</h1>
+
+<form action="${contextPath}/sweet/order/orderEachGoods.do" method="post">
 <main class="hc" >
-		
+
 		<div class="goods-info">
 			<div class="goods-img">
 				<img src="" alt="${goodsVO.name}">
@@ -115,7 +144,9 @@ article {
 				<p><strong>좋아요:</strong> ${goodsVO.like}</p>
 			</div>
 		</div>
+		
+		<button type="submit" class="btnon btnon1">계약하기</button>
 </main>
-
+</form>
 </body>
 </html>

@@ -50,7 +50,7 @@
         
         sb.append(String.format("<h3>%s</h3>", city));
         sb.append(String.format("<table class=\"table\">"));
-        sb.append(String.format("<thead><tr><th>날짜</th><th>날씨</th><th>최저/최고 기온</th><th>신뢰도</th></tr></thead>"));
+        sb.append(String.format("<thead><tr><th>날짜</th><th>날씨</th></thead>"));
         sb.append(String.format("<tbody>"));
         
         NodeList dataList = (NodeList)xpath.compile("data").evaluate(location, XPathConstants.NODESET);
@@ -68,7 +68,7 @@
             sb.append(String.format("<tr>"));
             sb.append(String.format("<td>%s</td>", tmEf));
             String img = "";
-            switch(wf){
+            /* switch(wf){
             case "맑음": img = "1.png"; break;
             case "흐림": img = "W_DB04.png"; break;
             case "비": img = "W_DB05.png"; break;
@@ -79,7 +79,7 @@
             case "흐리고 비": img = "W_NB08.png"; break;
             case "구름많고 비": img = "W_NB20.png"; break;
             }
-            sb.append(String.format("<img src=\""+ path +"/resources/img/%s\">", img));
+            sb.append(String.format("<img src=\""+ path +"/resources/img/%s\">", img)); */
             sb.append(String.format("<td>%s / %s</td>", tmn, tmx));
             sb.append(String.format("<td>%s</td>", reliability));
             sb.append(String.format("</tr>"));
@@ -112,10 +112,10 @@
         $("input[value='<%=stnId%>']").attr("checked", "checked");
     });
 </script>
- 
+
 </head>
 <body>
- 
+
     <div class="container">
         <h1>
             기상청 육상 중기예보 <small>v1.0 by XML</small>
@@ -124,18 +124,17 @@
             <div class="panel panel-default">
                 <div class="panel-heading">지역 선택</div>
                 <div class="panel-body">
-                    <form role="form" method="POST">
-                        <input type="radio" name="stnId" value="108" checked="checked">
-                        전국 <input type="radio" name="stnId" value="109"> 서울,경기 <input
-                            type="radio" name="stnId" value="105"> 강원 <input
-                            type="radio" name="stnId" value="131"> 충청북도 <input
-                            type="radio" name="stnId" value="133"> 충청남도 <input
-                            type="radio" name="stnId" value="146"> 전라북도 <input
-                            type="radio" name="stnId" value="156"> 전라남도 <input
-                            type="radio" name="stnId" value="143"> 경상북도 <input
-                            type="radio" name="stnId" value="159"> 경상남도 <input
-                            type="radio" name="stnId" value="184"> 제주특별자치도
- 
+                    <form role="form" method="GET">
+                        전국 <input type="radio" name="stnId" value="108" checked="checked">
+                        서울,경기 <input type="radio" name="stnId" value="109"> 
+                        강원 <input type="radio" name="stnId" value="105"> 
+                        충청북도 <input type="radio" name="stnId" value="131"> 
+                        충청남도 <input type="radio" name="stnId" value="133"> 
+                        전라북도 <input type="radio" name="stnId" value="146"> 
+                        전라남도 <input type="radio" name="stnId" value="156"> 
+                        경상북도 <input type="radio" name="stnId" value="143"> 
+                        경상남도 <input type="radio" name="stnId" value="159"> 
+                        제주특별자치도 <input type="radio" name="stnId" value="184"> 
                         <button type="submit" class="btn btn-default">Submit</button>
                     </form>
                 </div>
@@ -143,30 +142,13 @@
             <div class="panel panel-default">
                 <div class="panel-heading">기상 정보 출력</div>
                 <div class="panel-body">
- 
-                    <p>
-                        <b><%=title%></b>
-                    </p>
- 
-                    <p>
-                        <%=headerWf%>
-                    </p>
-                    
+                    <p><b><%=title%></b></p>
+                    <p><%=headerWf%></p>
                     <%=sb.toString()%>
- 
- 
                 </div>
             </div>
         </div>
- 
     </div>
- 
-</body>
-</html>
- 
- 
- 
-</div>
- 
+
 </body>
 </html>

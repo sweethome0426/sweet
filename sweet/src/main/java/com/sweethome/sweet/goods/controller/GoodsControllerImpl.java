@@ -29,24 +29,7 @@ public class GoodsControllerImpl implements GoodsController {
 	@Autowired
 	private GoodsService goodsService;
 	
-	/*@Override
-	@RequestMapping(value="/goodsDetail.do" ,method = RequestMethod.GET)
-	public ModelAndView goodsDetail(@RequestParam("goods_id") int goods_id,
-            HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("Call goodsDetail-method of control");
-	    request.setCharacterEncoding("utf-8");
-	    String viewName = "/goodsDetail.do";
-	    System.out.println("viewName : "+viewName);
-
-	 // DB에서 해당 상품 정보를 가져오기
-	    Map<String, Object> goodsVO = goodsService.goodsDetail(goods_id);
-	    
-	    ModelAndView mav = new ModelAndView();
-	    mav.addObject("goodsVO", goodsVO);
-	    mav.setViewName(viewName);
-	    return mav;
-	}*/
-	
+	//요청 파라미터로 전달된 goods_id를 사용하여 goodsService에서 상품 정보를 조회하고, 이를 ModelAndView 객체에 담아서 뷰 페이지로 전달합니다.
 	@Override
 	@RequestMapping(value="/goodsDetail" ,method = RequestMethod.GET)
 	public ModelAndView goodsDetail(@RequestParam("goods_id") int goods_id,
@@ -61,7 +44,7 @@ public class GoodsControllerImpl implements GoodsController {
 	    mav.setViewName(viewName);
 	    return mav;
 	}
-	//요청 파라미터로 전달된 goods_id를 사용하여 goodsService에서 상품 정보를 조회하고, 이를 ModelAndView 객체에 담아서 뷰 페이지로 전달합니다.
+	
 
 
 }
