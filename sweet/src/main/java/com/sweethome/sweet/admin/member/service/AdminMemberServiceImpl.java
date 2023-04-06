@@ -19,7 +19,7 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 	@Autowired
 	private AdminMemberDAO adminMemberDAO;
 
-	@Override
+	@Override		// 목록이다
 	public List listMembers() throws DataAccessException {
 		List membersList = null;
 		membersList = adminMemberDAO.selectAllMemberList();
@@ -28,7 +28,7 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 	
 	
 
-	@Override
+	@Override		//수정이다
 	public MemberVO modMember(String member_id) throws DataAccessException {
 		MemberVO memberVO = new MemberVO();
 		memberVO = adminMemberDAO.selectMemberById(member_id);
@@ -37,26 +37,31 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 
 
 
-	@Override
+	@Override			//추가다
 	public int addMember(MemberVO member) throws DataAccessException {
 		return adminMemberDAO.insertMember(member);
 	}
 
-	@Override
+	@Override			// 지우는거다
 	public int removeMember(String id) throws DataAccessException {
 		return adminMemberDAO.deleteMember(id);
 	}
 	
-	@Override
+	@Override		// 로그인
 	public MemberVO login(MemberVO memberVO) throws Exception{
 		return adminMemberDAO.loginById(memberVO);
 	}
 
 
 
-	@Override
+	@Override				// 업데이트 멤버 수정 하려고
 	public int updateMember(MemberVO member)throws DataAccessException{
 		return adminMemberDAO.updateMember(member);
+	}
+	
+	@Override
+	public int stopMember(MemberVO member) throws DataAccessException {
+		return adminMemberDAO.stopMember(member);
 	}
 	
 

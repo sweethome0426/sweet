@@ -89,7 +89,7 @@ function hide(elementId){
 				<li><a href="#">매매/전월세</a></li>
 				<li><a href="#">부동산/포장이사</a></li>
 				<li><a href="#">관심목록</a></li>
-				<li><a href="#">커뮤니티</a></li>
+				<li><a href="${contextPath}/board/listArticles.do">커뮤니티</a></li>
 				<li><a href="${contextPath}/customer/customerMain.do">고객센터</a></li>
 				<li><a href="#">날씨정보</a></li>
 				<%--  여기부터 헤더 바뀌는건데 아이디별로 누가 들어왔는지 헤더 부분에 나옴 알긋냐--%>

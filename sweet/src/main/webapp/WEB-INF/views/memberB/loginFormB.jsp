@@ -151,6 +151,7 @@ body {
 </style>
 
 <body>
+<h1>로그인</h1>
 
 <main class="hc">
 	<h2>로그인</h2>

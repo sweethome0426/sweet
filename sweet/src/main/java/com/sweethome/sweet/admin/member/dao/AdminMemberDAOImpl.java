@@ -47,9 +47,15 @@ public class AdminMemberDAOImpl implements AdminMemberDAO {
 		return vo;
 	}
 
-	@Override
+	@Override		//회원 수정하려고 이거구문 매퍼 멤버 updateMember 속성이 맞는곳에 실행된다.
 	public int updateMember(MemberVO memberVO) throws DataAccessException {
 		int result = sqlSession.update("mapper.member.updateMember", memberVO);
+		return result;
+	}
+
+	@Override			//회원정지 시키려고!
+	public int stopMember(MemberVO memberVO) throws DataAccessException {
+		int result = sqlSession.update("mapper.member.stopMember", memberVO);
 		return result;
 	}
 	
