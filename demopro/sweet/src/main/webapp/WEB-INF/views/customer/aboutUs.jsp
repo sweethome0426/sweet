@@ -76,6 +76,10 @@
         @import url {
             link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900"rel="stylesheet"
         }
+        .slide img {
+        	width:100%;
+        	height:250px;
+        }
     </style>
 
 </head>
@@ -86,7 +90,7 @@
     <div class="slide_wrap">
         <div class="slide_show">
             <div class="slide_img">
-                <div class="slide"><img src="${contextPath}/resources/image/home01.png" alt="이미지1"></div>
+                <div class="slide"><img src="${contextPath}/resources/image/home001.png" alt="이미지1"></div>
                 <div class="slide"><img src="https://tistory4.daumcdn.net/tistory/2980705/skin/images/hover02.jpg" alt="이미지2"></div>
                 <div class="slide"><img src="https://tistory4.daumcdn.net/tistory/2980705/skin/images/hover03.jpg" alt="이미지3"></div>
                 <div class="slide"><img src="https://tistory4.daumcdn.net/tistory/2980705/skin/images/hover04.jpg" alt="이미지4"></div>
