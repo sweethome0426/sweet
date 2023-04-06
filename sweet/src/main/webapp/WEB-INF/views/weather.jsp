@@ -1,246 +1,172 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
+    pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ page import="java.net.URL"%>
+<%@ page import="javax.xml.parsers.*"%>
+<%@ page import="org.w3c.dom.*"%>
+<%@page import="javax.xml.xpath.*"%>
+<%@ page import="org.xml.sax.InputSource"%>
 <%
-request.setCharacterEncoding("UTF-8");
+    //weather.jsp -> 지역 선택. 서브밋 액션. 날씨 정보 확인 및 출력.
+    //절대경로 확인
+    String path = request.getContextPath();
+ 
+    String stnId = request.getParameter("stnId");
+    if (stnId == null) {
+        stnId = "108";
+    }
+ 
+    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    DocumentBuilder builder = factory.newDocumentBuilder();
+    Document doc = null;
+ 
+    String str = String.format("http://www.kma.go.kr/weather/forecast/mid-term-rss3.jsp?stnId=%s", stnId);
+    System.out.println(str);
+    URL url = new URL(str);
+    InputSource is = new InputSource(url.openStream());
+    doc = builder.parse(is);
+ 
+    // XPath에 의한 XML 엘리먼트 탐색
+    XPath xpath = XPathFactory.newInstance().newXPath();
+ 
+    // 루트 엘리먼트 접근
+    //Node rootNode = (Node) xpath.compile("/rss").evaluate(doc, XPathConstants.NODE);
+    // System.out.println(rootNode.getNodeName()); //rss
+ 
+    //특정 엘리먼트의 텍스트 접근  rss/channel/item/title 뽑아오기
+    String title = xpath.compile("/rss/channel/item/title").evaluate(doc);
+    
+    // rss/channel/item/description/header/wf
+    String headerWf = xpath.compile("/rss/channel/item/description/header/wf").evaluate(doc);
+    
+    // rss/channel/item/description/body/location -> 복수개 존재하므로 NodeList로 받아온다.
+    NodeList locationList = (NodeList)xpath.compile("/rss/channel/item/description/body/location").evaluate(doc, XPathConstants.NODESET);
+ 
+    StringBuilder sb = new StringBuilder();
+    
+    for (int i=0; i < locationList.getLength(); i++) {
+        Node location = (Node)xpath.compile(String.format("/rss/channel/item/description/body/location[%s]", i+1)).evaluate(doc, XPathConstants.NODE);
+        
+        String city = xpath.compile("city").evaluate(location);
+        
+        sb.append(String.format("<h3>%s</h3>", city));
+        sb.append(String.format("<table class=\"table\">"));
+        sb.append(String.format("<thead><tr><th>날짜</th><th>날씨</th><th>최저/최고 기온</th><th>신뢰도</th></tr></thead>"));
+        sb.append(String.format("<tbody>"));
+        
+        NodeList dataList = (NodeList)xpath.compile("data").evaluate(location, XPathConstants.NODESET);
+        for (int k=0; k < dataList.getLength(); k++) {                                   //부모 -> 하나밖에 없어야 된다?(->Node)
+            Node dataNode = (Node)xpath.compile(String.format("data[%s]", k+1)).evaluate(location, XPathConstants.NODE);
+            
+            // // -> 자손 탐색
+            // / -> 루트
+            String tmEf = xpath.compile(String.format("tmEf", k+1)).evaluate(dataNode);
+            String wf = xpath.compile(String.format("wf", k+1)).evaluate(dataNode);
+            String tmn = xpath.compile(String.format("tmn", k+1)).evaluate(dataNode);
+            String tmx = xpath.compile(String.format("tmx", k+1)).evaluate(dataNode);
+            String reliability = xpath.compile(String.format("reliability", k+1)).evaluate(dataNode);
+            
+            sb.append(String.format("<tr>"));
+            sb.append(String.format("<td>%s</td>", tmEf));
+            String img = "";
+            switch(wf){
+            case "맑음": img = "1.png"; break;
+            case "흐림": img = "W_DB04.png"; break;
+            case "비": img = "W_DB05.png"; break;
+            case "비,눈": img = "W_DB06.png"; break;
+            case "눈": img = "W_DB08.png"; break;
+            case "구름조금": img = "W_NB02.png"; break;
+            case "구름많음": img = "W_NB03.png"; break;
+            case "흐리고 비": img = "W_NB08.png"; break;
+            case "구름많고 비": img = "W_NB20.png"; break;
+            }
+            sb.append(String.format("<img src=\""+ path +"/resources/img/%s\">", img));
+            sb.append(String.format("<td>%s / %s</td>", tmn, tmx));
+            sb.append(String.format("<td>%s</td>", reliability));
+            sb.append(String.format("</tr>"));
+        }            
+        sb.append(String.format("</tbody>"));
+        
+    }
 %>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-   <meta charset="utf-8" />
-   <title>날씨 정보</title>
-   
-<style>
-  p {
-    margin: 10px 0;
-  }
-  p span {
-    font-weight: bold;
-  }
-.btnon1 {
-	width: 100px;
-	margin-top: 5px;
-	background-color: #ffffff;
-	color: #112d4e;
-	border: 1px #112d4e solid;
-}
-
-.btnon1:hover {
-	width: 100px;
-	height: 35px;
-	margin-top: 5px;
-	border: none;
-	border-radius: 4px;
-	font-size: 13px;
-	font-weight: bold;
-	background-color: #112d4e;
-	color: white;
-}
-</style>   
-   
+<title>쌍용교육센터</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ 
+<!-- jQuery library -->
+<script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ 
+<!-- Latest compiled JavaScript -->
+<script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 
 <script>
-function getWeather() {
-	// 어제 날짜 정보 가져오기
-    var yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
-    // 어제 날짜를 YYYYMMDD 형식으로 변환
-    var baseDate = formatDate(yesterday);
-    
-    // 오늘 날짜 정보 가져오기
-    var today = new Date();
-    // 오늘 날짜를 YYYYMMDD 형식으로 변환
-    var todayDate = formatDate(today);
-    
- 	// 내일 날짜 정보 가져오기
-    var tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    // 내일 날짜를 YYYYMMDD 형식으로 변환
-    var tomorrowDate = formatDate(tomorrow);
-    
- 	// 모레 날짜 정보 가져오기
-    var dayAfterTomorrow = new Date();
-    dayAfterTomorrow.setDate(dayAfterTomorrow.getDate() + 2);
-    // 모레 날짜를 YYYYMMDD 형식으로 변환
-    var dayAfterTomorrowDate = formatDate(dayAfterTomorrow);
-    
-	
-    
-// API 호출 시 인자로 사용할 쿼리스트링 생성하기
-var queryParams = '?' + encodeURIComponent('serviceKey') + '=' + 'TY0vE9oNTY8ubExip3Tkp2Mntx%2FQlK%2B%2BfhGMqJsNFkWa5cKLUW%2FUig%2FlSEZeH5pcubLlZkNq6gB9rFzsnDEOrg%3D%3D';
-queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1');
-queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('1000');
-queryParams += '&' + encodeURIComponent('dataType') + '=' + encodeURIComponent('JSON');
-queryParams += '&' + encodeURIComponent('base_date') + '=' + encodeURIComponent(todayDate);
-queryParams += '&' + encodeURIComponent('base_time') + '=' + encodeURIComponent('0500');
-queryParams += '&' + encodeURIComponent('nx') + '=' + encodeURIComponent('55');
-queryParams += '&' + encodeURIComponent('ny') + '=' + encodeURIComponent('127');
-
-//API 호출하기
-var xhr = new XMLHttpRequest();
-var url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst';
-xhr.open('GET', url + queryParams);
-xhr.onreadystatechange = function () {
-    if (this.readyState == 4) {
-    	alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
-        const weatherData = JSON.parse(this.responseText);
-        
-        let maxTemp1 = ''; // 일 최고기온
-        let minTemp1 = ''; // 일 최저기온
-        let pop1 = '';
-        let sky1 = '';
-        let maxTemp2 = ''; // 일 최고기온
-        let minTemp2 = ''; // 일 최저기온
-        let pop2 = '';
-        let sky2 = '';
-        let maxTemp3 = ''; // 일 최고기온
-        let minTemp3 = ''; // 일 최저기온
-        let pop3 = '';
-        let sky3 = '';
-        
-        for (let i = 0; i < weatherData.response.body.items.item.length; i++) {
-        	const fcstDate = weatherData.response.body.items.item[i].fcstDate;
-        	const fcstTime = weatherData.response.body.items.item[i].fcstTime;
-            const fcstValue = weatherData.response.body.items.item[i].fcstValue;
-            const category = weatherData.response.body.items.item[i].category;
-            
-            if (fcstDate === todayDate && (fcstTime === '0600' || fcstTime === '1500')) {
-            if (category === 'TMN') {
-                minTemp1 = fcstValue;
-            }
-            else if (category === 'TMX') {
-                    maxTemp1 = fcstValue;
-                } else if (category === 'POP') {
-                	pop1 = fcstValue + '%'; // 강수확률
-                } else if (category === 'SKY') {
-                    switch (fcstValue) {
-                        case '1':
-                        	sky1 = '맑음';
-                            break;
-                        case '3':
-                        	sky1 = '구름많음';
-                            break;
-                        case '4':
-                        	sky1 = '흐림';
-                            break;
-                        default:
-                        	sky1 = '알 수 없음';
-                            break;
-                    }
-                }
-            }
-            else if (fcstDate === tomorrowDate && (fcstTime === '0600' || fcstTime === '1500')) {
-                if (category === 'TMN') {
-                    minTemp2 = fcstValue;
-                }
-                else if (category === 'TMX') {
-                        maxTemp2 = fcstValue;
-                    } else if (category === 'POP') {
-                    	pop2 = fcstValue + '%'; // 강수확률
-                    } else if (category === 'SKY') {
-                        switch (fcstValue) {
-                            case '1':
-                            	sky2 = '맑음';
-                                break;
-                            case '3':
-                            	sky2 = '구름많음';
-                                break;
-                            case '4':
-                            	sky2 = '흐림';
-                                break;
-                            default:
-                            	sky2 = '알 수 없음';
-                                break;
-                        }
-                    }
-                }
-            else if (fcstDate === dayAfterTomorrowDate && (fcstTime === '0600' || fcstTime === '1500')) {
-                if (category === 'TMN') {
-                    minTemp3 = fcstValue;
-                }
-                else if (category === 'TMX') {
-                        maxTemp3 = fcstValue;
-                    } else if (category === 'POP') {
-                    	pop3 = fcstValue + '%'; // 강수확률
-                    } else if (category === 'SKY') {
-                        switch (fcstValue) {
-                            case '1':
-                            	sky3 = '맑음';
-                                break;
-                            case '3':
-                            	sky3 = '구름많음';
-                                break;
-                            case '4':
-                            	sky3 = '흐림';
-                                break;
-                            default:
-                            	sky3 = '알 수 없음';
-                                break;
-                        }
-                    }
-                }
-        }
-        // 결과를 화면에 표시
-        document.getElementById("maxTemp1").innerHTML = maxTemp1;
-        document.getElementById("minTemp1").innerHTML = minTemp1;
-        document.getElementById('pop1').textContent = pop1;
-        document.getElementById('sky1').textContent = sky1;
-        document.getElementById("todayDate").innerHTML = todayDate;
-        document.getElementById("maxTemp2").innerHTML = maxTemp2;
-        document.getElementById("minTemp2").innerHTML = minTemp2;
-        document.getElementById('pop2').textContent = pop2;
-        document.getElementById('sky2').textContent = sky2;
-        document.getElementById("tomorrowDate").innerHTML = tomorrowDate;
-        document.getElementById("maxTemp3").innerHTML = maxTemp3;
-        document.getElementById("minTemp3").innerHTML = minTemp3;
-        document.getElementById('pop3').textContent = pop3;
-        document.getElementById('sky3').textContent = sky3;
-        document.getElementById("dayAfterTomorrowDate").innerHTML = dayAfterTomorrowDate;
-
-    }
-};
-xhr.send('');
-}
-
-function formatDate(date) {
-	  var year = date.getFullYear();
-	  var month = date.getMonth() + 1;
-	  var day = date.getDate();
-
-	  // 월과 일이 10보다 작을 경우, 앞에 0을 붙여줌
-	  if (month < 10) {
-	    month = '0' + month;
-	  }
-	  if (day < 10) {
-	    day = '0' + day;
-	  }
-
-	  return year + '' + month + '' + day; // YYYYMMDD 형식으로 반환
-	}
-</script>   
-   
+    $(document).ready(function() {
+        $("input[value='<%=stnId%>']").attr("checked", "checked");
+    });
+</script>
+ 
 </head>
 <body>
-
-    <p>날짜: <span id="todayDate"></span></p>
-    <p>최고기온: <span id="maxTemp1"></span></p>
-    <p>최저기온: <span id="minTemp1"></span></p>
-    <p>강수 확률: <span id="pop1"></span></p>
-    <p>하늘 상태: <span id="sky1"></span></p>
-    
-    <p>날짜: <span id="tomorrowDate"></span></p>
-    <p>최고기온: <span id="maxTemp2"></span></p>
-    <p>최저기온: <span id="minTemp2"></span></p>
-    <p>강수 확률: <span id="pop2"></span></p>
-    <p>하늘 상태: <span id="sky2"></span></p>
-    
-    <p>날짜: <span id="dayAfterTomorrowDate"></span></p>
-    <p>최고기온: <span id="maxTemp3"></span></p>
-    <p>최저기온: <span id="minTemp3"></span></p>
-    <p>강수 확률: <span id="pop3"></span></p>
-    <p>하늘 상태: <span id="sky3"></span></p>
-    <button type="button" class="btnon btnon1" onclick="getWeather()">검색</button>
-
+ 
+    <div class="container">
+        <h1>
+            기상청 육상 중기예보 <small>v1.0 by XML</small>
+        </h1>
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">지역 선택</div>
+                <div class="panel-body">
+                    <form role="form" method="POST">
+                        <input type="radio" name="stnId" value="108" checked="checked">
+                        전국 <input type="radio" name="stnId" value="109"> 서울,경기 <input
+                            type="radio" name="stnId" value="105"> 강원 <input
+                            type="radio" name="stnId" value="131"> 충청북도 <input
+                            type="radio" name="stnId" value="133"> 충청남도 <input
+                            type="radio" name="stnId" value="146"> 전라북도 <input
+                            type="radio" name="stnId" value="156"> 전라남도 <input
+                            type="radio" name="stnId" value="143"> 경상북도 <input
+                            type="radio" name="stnId" value="159"> 경상남도 <input
+                            type="radio" name="stnId" value="184"> 제주특별자치도
+ 
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">기상 정보 출력</div>
+                <div class="panel-body">
+ 
+                    <p>
+                        <b><%=title%></b>
+                    </p>
+ 
+                    <p>
+                        <%=headerWf%>
+                    </p>
+                    
+                    <%=sb.toString()%>
+ 
+ 
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+ 
+</body>
+</html>
+ 
+ 
+ 
+</div>
+ 
 </body>
 </html>

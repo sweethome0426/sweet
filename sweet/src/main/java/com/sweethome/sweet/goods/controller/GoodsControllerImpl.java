@@ -61,6 +61,7 @@ public class GoodsControllerImpl implements GoodsController {
 	    mav.setViewName(viewName);
 	    return mav;
 	}
+	//요청 파라미터로 전달된 goods_id를 사용하여 goodsService에서 상품 정보를 조회하고, 이를 ModelAndView 객체에 담아서 뷰 페이지로 전달합니다.
 
 
 }
