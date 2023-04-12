@@ -10,6 +10,6 @@ public interface OrderService {
 	public void addNewOrder(List<OrderVO> myOrderList) throws Exception;
 	public OrderVO findMyOrder(int order_id) throws Exception;
 	
-	
+	public OrderVO getGoodsById(int goods_id) throws Exception;
 }
 

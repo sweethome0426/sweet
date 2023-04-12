@@ -25,7 +25,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	public void addNewOrder(List<OrderVO> myOrderList) throws Exception{
-		orderDAO.insertNewOrder(myOrderList);
+		//orderDAO.insertNewOrder(myOrderList, goodscon_id);
 		orderDAO.removeGoodsFromCart(myOrderList);
 	}	
 	
@@ -33,5 +33,11 @@ public class OrderServiceImpl implements OrderService {
 		return orderDAO.findMyOrder(order_id);
 	}
 
+	public OrderVO getGoodsById(int goods_id) throws Exception {
+	    // TODO: Add code to retrieve GoodsVO object by ID from the data source (e.g. database)
+		OrderVO orderVO = new OrderVO();
+		orderVO.setGoods_id(goods_id);
+	    return orderVO;
+	}
 }
 

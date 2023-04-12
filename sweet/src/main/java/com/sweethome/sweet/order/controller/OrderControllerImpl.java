@@ -31,7 +31,7 @@ public class OrderControllerImpl implements OrderController {
 	
 	
 	@RequestMapping(value = "/orderEachGoods.do", method = RequestMethod.POST)
-	public ModelAndView orderEachGoods(@ModelAttribute("orderVO") OrderVO _orderVO,
+	public ModelAndView orderEachGoods(@ModelAttribute("orderVO") OrderVO _orderVO, Integer goods_id,
 	                                    HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 	    request.setCharacterEncoding("utf-8");
@@ -59,22 +59,23 @@ public class OrderControllerImpl implements OrderController {
 	    ModelAndView mav = new ModelAndView(viewName);
 
 	    // 현재 로그인한 회원의 정보를 가져옴
-	    MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
+	    MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
 
 	    // 계약 정보에 필요한 정보들을 설정
-	    GoodsVO goodsVO = (GoodsVO) session.getAttribute("goodsVO");
+	    OrderVO orderVO = orderService.getGoodsById(goods_id);
 	    MemberVOB memberVOB = (MemberVOB) session.getAttribute("memberVOB");
 
-	    _orderVO.setGoods_id(goodsVO.getGoods_id());
-	    _orderVO.setMember_id(memberInfo.getMember_id());
+	    _orderVO.setGoods_id(orderVO.getGoods_id());
+	    _orderVO.setMember_id(memberVO.getMember_id());
 	    _orderVO.setBp_id(memberVOB.getBp_id());
-	    _orderVO.setPrice(goodsVO.getPayment());
+	    _orderVO.setPrice(orderVO.getPrice());
 
 	    List<OrderVO> myOrderList = new ArrayList<OrderVO>();
 	    myOrderList.add(_orderVO);
 
+	    session.setAttribute("orderVO", orderVO);
 	    session.setAttribute("myOrderList", myOrderList);
-	    session.setAttribute("orderer", memberInfo);
+	    session.setAttribute("memberVO", memberVO);
 	    return mav;
 	}
 

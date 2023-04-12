@@ -21,7 +21,7 @@ public class OrderDAOImpl implements OrderDAO {
 		return orderGoodsList;
 	}
 	
-	public void insertNewOrder(List<OrderVO> myOrderList) throws DataAccessException{
+	public void insertNewOrder(List<OrderVO> myOrderList, int goodscon_id) throws DataAccessException{
 		int order_id=selectOrderID();
 		for(int i=0; i<myOrderList.size();i++){
 			OrderVO orderVO =(OrderVO)myOrderList.get(i);

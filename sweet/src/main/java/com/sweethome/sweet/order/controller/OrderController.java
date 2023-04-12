@@ -12,6 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sweethome.sweet.order.vo.OrderVO;
 
 public interface OrderController {
-	public ModelAndView orderEachGoods(@ModelAttribute("orderVO") OrderVO _orderVO,
+	public ModelAndView orderEachGoods(@ModelAttribute("orderVO") OrderVO _orderVO, Integer goods_id,
             HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

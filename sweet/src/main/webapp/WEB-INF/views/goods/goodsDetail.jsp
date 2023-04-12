@@ -102,7 +102,7 @@ article {
 
 <h1>부동산 정보 상세페이지</h1>
 
-<form action="${contextPath}/sweet/order/orderEachGoods.do" method="post">
+<form action="${contextPath}/sweet/order/orderEachGoods.do?goods_id=1" method="post">
 <main class="hc" >
 
 		<div class="goods-info">
